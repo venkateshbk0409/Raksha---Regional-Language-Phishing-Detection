@@ -28,28 +28,23 @@ The proposed detection pipeline will include:
 
 The initial prototype will focus on **Kannada and English/code-mixed Kannada-English**, with the architecture designed to support expansion to other Indian regional languages.
 
+
 ## How It Works
 
-User Input
-    │
-    ▼
-Language Detection & Preprocessing
-    │
-    ├───────────────┐
-    ▼               ▼
-NLP Analysis     URL Analysis
-    │               │
-    └───────┬───────┘
-            ▼
-     Risk Scoring Engine
-            │
-            ▼
-   ┌────────┼────────┐
-   ▼        ▼        ▼
- Safe   Suspicious  Phishing
-            │
-            ▼
-   Explanation & Action
+Raksha follows a multi-stage detection process:
+
+1. **User Input** — The user provides a suspicious message and, optionally, a URL.
+
+2. **Language Detection & Preprocessing** — The system identifies the language and prepares regional-language, transliterated, and code-mixed text for analysis.
+
+3. **NLP Analysis** — The system analyzes the message for phishing and social-engineering indicators.
+
+4. **URL Analysis** — If a URL is provided, the system analyzes its domain and URL-level characteristics for suspicious patterns.
+
+5. **Risk Scoring** — NLP results, URL signals, and rule-based indicators are combined to determine the overall phishing risk.
+
+6. **Result & Explanation** — Raksha classifies the content as **Safe, Suspicious, or Phishing** and provides the main reasons and recommended action.
+   
 
 ## Key Features
 
