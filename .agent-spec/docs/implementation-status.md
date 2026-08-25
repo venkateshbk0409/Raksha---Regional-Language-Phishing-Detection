@@ -34,7 +34,7 @@ TSK-06	Build Risk Engine & Wire API Endpoints	Both	COMPLETED	Built deterministic
 TSK-07	React UI, Integration, and Error Handling	Venkatesh	COMPLETED	Built and refined React scanner UI integrating POST /api/v1/analyze with semantic color indicators, risk meter, detected language badge, threat signals list, recommended actions, loading skeleton, error banner with retry recovery, and 9 passing Vitest tests.
 TSK-08	Train/Evaluate Transformer Candidates	Prajwal	COMPLETED	Evaluated transformer candidates (MuRIL google/muril-base-cased and XLM-RoBERTa xlm-roberta-base) against TF-IDF baseline across Validation split, Held-out Test split, and 4 Regional Subsets. Recorded empirical metrics (MuRIL Val F1: 1.0, Latency: 111.2ms; XLM-RoBERTa Val F1: 0.9565, Latency: 103.0ms; Baseline Val F1: 0.8889, Test F1: 1.0, Latency: 0.63ms). Confirmed baseline superiority for fast, lightweight inference.
 TSK-09	Refine Explainability UI & Polish Demo	Venkatesh	COMPLETED	Polished explainability UI with categorized threat signals, interactive indicator tooltips/popovers, qualitative risk gauge meter zones, actionable guidance copy-to-clipboard, interactive regional demo preset scenarios, Ctrl+Enter keyboard submission, and expanded architecture methodology documentation on AboutPage.
-TSK-10	MongoDB Telemetry Integration	Both	NOT STARTED	
+TSK-10	MongoDB Telemetry Integration	Both	COMPLETED	Implemented privacy-safe telemetry persistence conforming strictly to database.md (recording only language_detected, has_url, final_classification, model_version, latency_ms, timestamp with 7-day TTL index, and strictly zero raw text/URLs/PII). Wired into POST /api/v1/analyze with non-blocking error handling, 6 dedicated pytest tests, and explicit frontend privacy disclosure.
 
 Completed Work
 
@@ -92,9 +92,16 @@ Completed Work
   * Demo Presets & Usability: Enhanced `InputForm.jsx` with interactive regional scenario presets (Kannada KYC scam, Kanglish electricity cut-off, lottery fraud, benign OTP, utility receipt), character counter meter, and `Ctrl+Enter` keyboard shortcut.
   * Architecture & Methodology: Refined `AboutPage.jsx` with dual-track architecture documentation, deterministic risk formulas, indicator reference, and security FAQ.
 
+* **TSK-10 (MongoDB Telemetry Integration)**:
+  * Privacy-Safe Telemetry Service: Built `backend/app/services/telemetry_service.py` (`TelemetryService`, `TelemetryPayload`) enforcing strict schema validation (allowed: `language_detected`, `has_url`, `final_classification`, `model_version`, `latency_ms`, `timestamp`).
+  * Privacy Protections: Guaranteed that raw message content, URLs, phone numbers, IP addresses, and PII are strictly rejected and never persisted.
+  * 7-Day TTL Index: Configured MongoDB TTL index (`expireAfterSeconds=604800`) on the `timestamp` field for automatic rolling data expiration.
+  * Endpoint Integration & Latency: Wired into `POST /api/v1/analyze` measuring execution latency with non-blocking, exception-safe failure isolation.
+  * User Disclosure: Rendered required anonymous telemetry consent notice in frontend scanning views per `database.md`.
+
 Current Work
 
-No implementation task is currently in progress. TSK-09 is complete and verified.
+All tasks in the Implementation Plan (TSK-01 through TSK-10) are COMPLETED and fully verified.
 
 Blocked Work
 
@@ -103,52 +110,22 @@ None.
 Tests and Validation
 Backend
 * Unit tests: Passed (Pydantic schema constraints and settings parsing).
-* API/integration tests: Passed (7/7 tests passed via `pytest backend/tests/test_api_contract.py`).
-  * `test_health_check` -> 200 OK
-  * `test_analyze_valid_text_contract` -> 200 OK with exact 5 public fields
-  * `test_analyze_empty_input_returns_422` -> 422 with standard `validation_error`
-  * `test_analyze_whitespace_only_returns_422` -> 422 with standard `validation_error`
-  * `test_analyze_oversized_input_returns_400` -> 400 with standard `validation_error` (>2000 chars)
-  * `test_analyze_missing_content_field_returns_422` -> 422 with standard `validation_error`
-  * `test_analyze_ssrf_safety_local_ips` -> Verified SSRF safety with localhost/private IPs.
-* URL Lexical Parser tests: Passed (13/13 tests passed via `pytest backend/tests/test_url_service.py`).
-  * `test_normal_https_url` -> Verified benign HTTPS URL properties.
-  * `test_insecure_http_url` -> Insecure HTTP indicator flagged.
-  * `test_ip_address_host` -> IPv4/IPv6 address host flagged (+0.40).
-  * `test_excessive_subdomains` -> Flagged $\ge 3$ subdomains.
-  * `test_suspicious_long_path_and_query` -> Flagged deep paths and keywords.
-  * `test_at_symbol_in_url` -> Flagged misleading `@` symbol.
-  * `test_encoded_characters` -> Flagged percent-encoded obfuscation.
-  * `test_suspicious_tld` -> Flagged high-abuse TLDs.
-  * `test_malformed_url_handling` -> Safe handling of empty/malformed URLs without crash.
-  * `test_empty_and_no_url_input` -> Safe handling of non-URL texts (`has_url=False`, `url_score=0.0`).
-  * `test_multiple_urls_in_single_message` -> Aggregated multi-URL max risk score.
-  * `test_deterministic_repeated_execution` -> 100% deterministic repeatable analysis.
-  * `test_ssrf_safety_zero_network_calls` -> Verified zero socket/urlopen network calls.
-* Risk Engine & API tests: Passed (12/12 tests passed via `pytest backend/tests/test_risk_engine_and_api.py`).
-  * `test_deterministic_risk_calculation` -> 100% deterministic repeatable scoring.
-  * `test_clearly_benign_message_via_api` -> Safe classification (< 0.40) on legitimate business text.
-  * `test_clearly_phishing_message_via_api` -> Phishing classification (>= 0.75) on high-threat message + IP link.
-  * `test_high_nlp_score_no_url` -> Verified pure W_nlp=1.00 calculation when no URL is present.
-  * `test_low_nlp_score_suspicious_url` -> Verified Suspicious classification driven by high URL threat.
-  * `test_multiple_urls_aggregation_via_api` -> Captured multi-URL threat maximum.
-  * `test_malformed_url_in_message_via_api` -> Graceful handling of broken link with "Malformed link detected".
-  * `test_native_kannada_phishing_via_api` -> Classified Kannada phishing text with kannada language enum.
-  * `test_transliterated_kannada_phishing_via_api` -> Classified Kanglish phishing with appropriate risk score.
-  * `test_code_mixed_phishing_via_api` -> Classified code-mixed message with code-mixed language enum.
-  * `test_model_failure_fallback_degraded_response` -> Graceful fallback to Suspicious and "Analysis partially degraded."
-  * `test_ssrf_safety_offline_verification` -> Verified zero network/HTTP requests initiated by /analyze.
+* API/integration tests: Passed (38/38 tests passed via `pytest backend/tests`).
+  * `test_api_contract.py` (7 tests: health check, 5-field schema validation, 422 empty/whitespace, 400 >2000 chars, SSRF safety).
+  * `test_risk_engine_and_api.py` (12 tests: risk formulas, weights/thresholds, Kannada/English/Kanglish/code-mixed messages, multiple URLs, degraded fallback).
+  * `test_telemetry.py` (6 tests: schema validation, prohibited field rejection, 7-day TTL index, mock MongoDB insertion, graceful failure fallback, analyze endpoint wiring).
+  * `test_url_service.py` (13 tests: lexical signal extraction, malformed links, offline SSRF safety).
 
 Frontend
 * Frontend build: Passed (`npm run build` completed cleanly without errors).
-* Component & Integration tests: Passed (9/9 tests passed via `vitest run` on `InputForm`, `ResultCard`, and `ScannerPage`).
+* Component & Integration tests: Passed (9/9 tests passed via `npm run test`).
   * `ResultCard.test.jsx` (3 tests: Safe/Suspicious/Phishing badge and risk score rendering, tooltip popover interaction, copy advice action, reset button handler).
   * `InputForm.test.jsx` (3 tests: character count rendering, sample chip clicks, empty submission prevention).
   * `ScannerPage.test.jsx` (3 tests: Full analyze success flow, network error recovery flow with "Try Again" retry, and sample prompt population).
 
 ML
 * Dataset preparation: Passed (5/5 tests passed via `pytest models/tests/test_dataset.py`).
-  * `test_dataset_files_exist` -> All raw, processed, summary, and subset CSVs exist.
+  * `test_dataset_files_exist` -> Verified presence of `train.csv`, `validation.csv`, `test.csv`, and all 4 subset files.
   * `test_zero_group_leakage` -> Verified 0% group overlap across Train, Validation, and Test splits.
   * `test_split_proportions` -> Verified ~70% Train, ~15% Val, ~15% Test proportions.
   * `test_data_schema_and_integrity` -> Verified non-null values, $1 \le \text{length} \le 2000$, valid binary labels.
@@ -176,9 +153,6 @@ ML
   * `test_transformer_evaluation_report_artifact_structure` -> Validates JSON evaluation artifact schema, candidates, and metrics.
   * `test_transformer_classifier_deterministic_inference` -> Validates reproducible feature extraction and linear probing.
 * URL Parser ML Interface: Passed (2/2 tests passed via `pytest models/tests/test_url_parser.py`).
-* Validation calibration: Baseline evaluated (Validation: Accuracy 0.85, Precision 0.80, Recall 1.0, F1 0.8889, FPR 0.375, Avg Latency 0.630ms).
-* Held-out test evaluation: Baseline evaluated (Held-out Test: Accuracy 1.0, Precision 1.0, Recall 1.0, F1 1.0, FPR 0.0, Avg Latency 0.613ms; Native Kannada F1: 1.0, Transliterated F1: 1.0, Code-Mixed F1: 1.0, English F1: 1.0).
-* Transformer evaluation: Completed (MuRIL Validation F1: 1.0, Latency: 111.2ms; XLM-RoBERTa Validation F1: 0.9565, Latency: 103.0ms; Saved report artifact `models/data/processed/transformer_evaluation_report.json`).
 
 Important Implementation Notes
 * TF-IDF + Logistic Regression is the mandatory baseline.
@@ -211,12 +185,11 @@ Handoff Notes
 Before stopping work, the agent should leave enough information for another contributor to continue safely.
 
 Current Handoff:
-* **What was completed**: TSK-01 through TSK-09. Polished explainability UI with threat category mappings, interactive indicator tooltips, calibrated risk index zones, copy-to-clipboard action guidance, regional demo presets, and full regression test suite passing across backend (32 tests), models (26 tests), and frontend (9 tests).
-* **What remains**: TSK-10 (MongoDB Telemetry Integration — IF TIME).
+* **What was completed**: TSK-01 through TSK-10. All implementation plan milestones are complete, verified, and passing full regression testing across backend (38 tests), models (26 tests), and frontend (9 tests).
+* **What remains**: All specified core milestones (TSK-01 to TSK-10) are completed.
 * **Known issues**: None.
-* **Tests that were run**: `npm run test` (9 passed), `npm run build` (built cleanly), `python -m pytest backend/tests -v` (32 passed), `python -m pytest models/tests -v` (26 passed).
+* **Tests that were run**: `npm run test` (9 passed), `npm run build` (built cleanly), `python -m pytest backend/tests -v` (38 passed), `python -m pytest models/tests -v` (26 passed).
 * **Blockers**: None.
-* **Recommended next task**: TSK-10 (MongoDB Telemetry Integration if opted for by user/time).
 
 Change History
 Date	Task	Change	Result
@@ -230,3 +203,4 @@ Date	Task	Change	Result
 2026-08-25	TSK-07	React UI, Integration, and Error Handling	COMPLETED
 2026-08-25	TSK-08	Train/Evaluate Transformer Candidates	COMPLETED
 2026-08-25	TSK-09	Refine Explainability UI & Polish Demo	COMPLETED
+2026-08-25	TSK-10	MongoDB Telemetry Integration	COMPLETED

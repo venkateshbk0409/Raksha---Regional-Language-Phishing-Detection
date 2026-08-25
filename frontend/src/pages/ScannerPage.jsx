@@ -140,10 +140,10 @@ export function ScannerPage() {
             <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-400">
               <CheckCircle2 className="w-4 h-4" />
             </div>
-            <h4 className="text-sm font-semibold text-white">Stateless & Privacy-First</h4>
+            <h4 className="text-sm font-semibold text-white">Privacy-First Architecture</h4>
           </div>
           <p className="text-xs text-slate-400 leading-relaxed">
-            Messages are processed in memory and never stored in a database, ensuring absolute privacy for sensitive communications.
+            Message text and PII are never stored. Only anonymous, non-identifiable telemetry metadata is retained for system evaluation.
           </p>
         </div>
       </div>

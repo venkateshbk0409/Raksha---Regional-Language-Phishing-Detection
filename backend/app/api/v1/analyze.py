@@ -1,5 +1,6 @@
 """Router for phishing analysis endpoint POST /api/v1/analyze."""
 
+import time
 from fastapi import APIRouter, HTTPException, Request, status
 from backend.app.core.risk_engine import risk_engine
 from backend.app.schemas.analyze import (
@@ -10,6 +11,7 @@ from backend.app.schemas.analyze import (
     LanguageEnum,
 )
 from backend.app.services.nlp_service import nlp_service
+from backend.app.services.telemetry_service import telemetry_service
 from backend.app.services.url_service import url_parser
 
 router = APIRouter(tags=["Analysis"])
@@ -28,8 +30,10 @@ router = APIRouter(tags=["Analysis"])
 async def analyze_content(request: Request, payload: AnalyzeRequest) -> AnalyzeResponse:
     """Analyze input text/URL for phishing indicators.
 
-    Contract-enforcing endpoint following api-specification.md and wired to Risk Engine.
+    Contract-enforcing endpoint following api-specification.md, wired to Risk Engine
+    and Privacy-Safe Telemetry Service.
     """
+    t_start = time.perf_counter()
     raw_content = payload.content
 
     # Strict length check: > 2000 characters must return HTTP 400 per api-specification.md
@@ -55,6 +59,17 @@ async def analyze_content(request: Request, payload: AnalyzeRequest) -> AnalyzeR
         language_detected=nlp_res["language_detected"],
         is_degraded=nlp_res["is_degraded"],
         is_url_only=nlp_res["is_url_only"],
+    )
+
+    t_end = time.perf_counter()
+    latency_ms = int(round((t_end - t_start) * 1000))
+
+    # 4. Privacy-safe telemetry logging (database.md - no raw text/URLs/PII)
+    telemetry_service.record_telemetry(
+        language_detected=assessment.language_detected,
+        has_url=url_res.has_url,
+        final_classification=assessment.classification,
+        latency_ms=latency_ms,
     )
 
     return AnalyzeResponse(

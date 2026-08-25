@@ -1,7 +1,7 @@
 """Application configuration using Pydantic Settings."""
 
-from typing import List, Union
 import json
+from typing import List, Optional, Union
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -15,6 +15,13 @@ class Settings(BaseSettings):
     ]
     RATE_LIMIT_PER_MINUTE: int = 30
     MAX_CONTENT_LENGTH: int = 2000
+
+    # Telemetry configuration (TSK-10: database.md)
+    MONGODB_URI: Optional[str] = None
+    MONGODB_DB_NAME: str = "raksha_db"
+    MONGODB_COLLECTION: str = "telemetry"
+    ENABLE_TELEMETRY: bool = False
+    MODEL_VERSION: str = "1.0.0-baseline-tfidf"
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod

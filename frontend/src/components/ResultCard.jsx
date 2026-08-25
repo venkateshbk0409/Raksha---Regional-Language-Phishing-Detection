@@ -205,8 +205,8 @@ export function ResultCard({ result, onReset }) {
       {/* Scan Another Message & Reset */}
       <div className="pt-4 border-t border-slate-800/90 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
         <span className="flex items-center gap-1">
-          <Info className="w-3.5 h-3.5 text-slate-400" />
-          Stateless verification • Local offline lexical analysis
+          <Info className="w-3.5 h-3.5 text-cyan-400" />
+          <span>Anonymous metadata (excluding message content) is logged for system improvement.</span>
         </span>
         <button
           onClick={onReset}
