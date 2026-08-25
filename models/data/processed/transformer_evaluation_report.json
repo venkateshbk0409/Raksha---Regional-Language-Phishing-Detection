@@ -1,0 +1,292 @@
+{
+  "timestamp": "2026-08-25T13:10:15Z",
+  "dataset_split_summary": {
+    "train_samples": 100,
+    "validation_samples": 20,
+    "test_samples": 24
+  },
+  "candidates": {
+    "muril": {
+      "display_name": "MuRIL (google/muril-base-cased)",
+      "model_name": "google/muril-base-cased",
+      "validation_metrics": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "false_positive_rate": 0.0,
+        "avg_latency_ms": 111.217,
+        "confusion_matrix": {
+          "true_negative": 8,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_positive": 12
+        }
+      },
+      "held_out_test_metrics": {
+        "accuracy": 0.6667,
+        "precision": 1.0,
+        "recall": 0.3333,
+        "f1_score": 0.5,
+        "false_positive_rate": 0.0,
+        "avg_latency_ms": 103.049,
+        "confusion_matrix": {
+          "true_negative": 12,
+          "false_positive": 0,
+          "false_negative": 8,
+          "true_positive": 4
+        }
+      },
+      "regional_subsets_metrics": {
+        "native_kannada": {
+          "accuracy": 0.6667,
+          "precision": 1.0,
+          "recall": 0.3333,
+          "f1_score": 0.5,
+          "false_positive_rate": 0.0,
+          "avg_latency_ms": 102.426,
+          "confusion_matrix": {
+            "true_negative": 3,
+            "false_positive": 0,
+            "false_negative": 2,
+            "true_positive": 1
+          }
+        },
+        "transliterated_kannada": {
+          "accuracy": 0.6667,
+          "precision": 1.0,
+          "recall": 0.3333,
+          "f1_score": 0.5,
+          "false_positive_rate": 0.0,
+          "avg_latency_ms": 89.915,
+          "confusion_matrix": {
+            "true_negative": 3,
+            "false_positive": 0,
+            "false_negative": 2,
+            "true_positive": 1
+          }
+        },
+        "code_mixed": {
+          "accuracy": 0.6667,
+          "precision": 1.0,
+          "recall": 0.3333,
+          "f1_score": 0.5,
+          "false_positive_rate": 0.0,
+          "avg_latency_ms": 123.741,
+          "confusion_matrix": {
+            "true_negative": 3,
+            "false_positive": 0,
+            "false_negative": 2,
+            "true_positive": 1
+          }
+        },
+        "english": {
+          "accuracy": 0.6667,
+          "precision": 1.0,
+          "recall": 0.3333,
+          "f1_score": 0.5,
+          "false_positive_rate": 0.0,
+          "avg_latency_ms": 160.115,
+          "confusion_matrix": {
+            "true_negative": 3,
+            "false_positive": 0,
+            "false_negative": 2,
+            "true_positive": 1
+          }
+        }
+      }
+    },
+    "xlm_roberta": {
+      "display_name": "XLM-RoBERTa (xlm-roberta-base)",
+      "model_name": "xlm-roberta-base",
+      "validation_metrics": {
+        "accuracy": 0.95,
+        "precision": 1.0,
+        "recall": 0.9167,
+        "f1_score": 0.9565,
+        "false_positive_rate": 0.0,
+        "avg_latency_ms": 102.999,
+        "confusion_matrix": {
+          "true_negative": 8,
+          "false_positive": 0,
+          "false_negative": 1,
+          "true_positive": 11
+        }
+      },
+      "held_out_test_metrics": {
+        "accuracy": 0.6667,
+        "precision": 1.0,
+        "recall": 0.3333,
+        "f1_score": 0.5,
+        "false_positive_rate": 0.0,
+        "avg_latency_ms": 83.992,
+        "confusion_matrix": {
+          "true_negative": 12,
+          "false_positive": 0,
+          "false_negative": 8,
+          "true_positive": 4
+        }
+      },
+      "regional_subsets_metrics": {
+        "native_kannada": {
+          "accuracy": 0.6667,
+          "precision": 1.0,
+          "recall": 0.3333,
+          "f1_score": 0.5,
+          "false_positive_rate": 0.0,
+          "avg_latency_ms": 74.987,
+          "confusion_matrix": {
+            "true_negative": 3,
+            "false_positive": 0,
+            "false_negative": 2,
+            "true_positive": 1
+          }
+        },
+        "transliterated_kannada": {
+          "accuracy": 0.6667,
+          "precision": 1.0,
+          "recall": 0.3333,
+          "f1_score": 0.5,
+          "false_positive_rate": 0.0,
+          "avg_latency_ms": 75.559,
+          "confusion_matrix": {
+            "true_negative": 3,
+            "false_positive": 0,
+            "false_negative": 2,
+            "true_positive": 1
+          }
+        },
+        "code_mixed": {
+          "accuracy": 0.6667,
+          "precision": 1.0,
+          "recall": 0.3333,
+          "f1_score": 0.5,
+          "false_positive_rate": 0.0,
+          "avg_latency_ms": 76.443,
+          "confusion_matrix": {
+            "true_negative": 3,
+            "false_positive": 0,
+            "false_negative": 2,
+            "true_positive": 1
+          }
+        },
+        "english": {
+          "accuracy": 0.6667,
+          "precision": 1.0,
+          "recall": 0.3333,
+          "f1_score": 0.5,
+          "false_positive_rate": 0.0,
+          "avg_latency_ms": 105.041,
+          "confusion_matrix": {
+            "true_negative": 3,
+            "false_positive": 0,
+            "false_negative": 2,
+            "true_positive": 1
+          }
+        }
+      }
+    }
+  },
+  "baseline_tfidf_comparison": {
+    "model_name": "TF-IDF + Logistic Regression Baseline",
+    "training_samples": 100,
+    "validation_metrics": {
+      "samples": 20,
+      "accuracy": 0.85,
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1_score": 0.8889,
+      "false_positive_rate": 0.375,
+      "confusion_matrix": {
+        "true_negative": 5,
+        "false_positive": 3,
+        "false_negative": 0,
+        "true_positive": 12
+      },
+      "avg_latency_ms": 0.63,
+      "total_latency_ms": 12.607
+    },
+    "test_metrics": {
+      "samples": 24,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "false_positive_rate": 0.0,
+      "confusion_matrix": {
+        "true_negative": 12,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_positive": 12
+      },
+      "avg_latency_ms": 0.613,
+      "total_latency_ms": 14.714
+    },
+    "regional_subsets_metrics": {
+      "native_kannada": {
+        "samples": 6,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "false_positive_rate": 0.0,
+        "confusion_matrix": {
+          "true_negative": 3,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_positive": 3
+        },
+        "avg_latency_ms": 1.115,
+        "total_latency_ms": 6.689
+      },
+      "transliterated_kannada": {
+        "samples": 6,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "false_positive_rate": 0.0,
+        "confusion_matrix": {
+          "true_negative": 3,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_positive": 3
+        },
+        "avg_latency_ms": 0.759,
+        "total_latency_ms": 4.553
+      },
+      "codemixed": {
+        "samples": 6,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "false_positive_rate": 0.0,
+        "confusion_matrix": {
+          "true_negative": 3,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_positive": 3
+        },
+        "avg_latency_ms": 0.719,
+        "total_latency_ms": 4.313
+      },
+      "english": {
+        "samples": 6,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "false_positive_rate": 0.0,
+        "confusion_matrix": {
+          "true_negative": 3,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_positive": 3
+        },
+        "avg_latency_ms": 1.055,
+        "total_latency_ms": 6.327
+      }
+    }
+  }
+}

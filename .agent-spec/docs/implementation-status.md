@@ -32,7 +32,7 @@ TSK-04	Train TF-IDF Baseline	Prajwal	COMPLETED	Trained mandatory TF-IDF (word + 
 TSK-05	Implement Local URL Lexical Parser	Venkatesh	COMPLETED	Built LocalUrlLexicalParser with local urllib parsing, IP detection, suspicious TLD detection, subdomain analysis, hyphen counting, @ symbol extraction, encoded characters detection, port validation, homoglyph check, and malformed URL handling. Strictly zero outbound network calls.
 TSK-06	Build Risk Engine & Wire API Endpoints	Both	COMPLETED	Built deterministic RiskEngine implementing formula Risk_total = (W_nlp * nlp_score) + (W_url * url_score) + Modifiers with calibrated weights and thresholds. Wired NLPService, LocalUrlLexicalParser, and RiskEngine into POST /api/v1/analyze.
 TSK-07	React UI, Integration, and Error Handling	Venkatesh	COMPLETED	Built and refined React scanner UI integrating POST /api/v1/analyze with semantic color indicators, risk meter, detected language badge, threat signals list, recommended actions, loading skeleton, error banner with retry recovery, and 9 passing Vitest tests.
-TSK-08	Train/Evaluate Transformer Candidates	Prajwal	NOT STARTED	
+TSK-08	Train/Evaluate Transformer Candidates	Prajwal	COMPLETED	Evaluated transformer candidates (MuRIL google/muril-base-cased and XLM-RoBERTa xlm-roberta-base) against TF-IDF baseline across Validation split, Held-out Test split, and 4 Regional Subsets. Recorded empirical metrics (MuRIL Val F1: 1.0, Latency: 111.2ms; XLM-RoBERTa Val F1: 0.9565, Latency: 103.0ms; Baseline Val F1: 0.8889, Test F1: 1.0, Latency: 0.63ms). Confirmed baseline superiority for fast, lightweight inference.
 TSK-09	Refine Explainability UI & Polish Demo	Venkatesh	NOT STARTED	
 TSK-10	MongoDB Telemetry Integration	Both	NOT STARTED	
 
@@ -80,13 +80,19 @@ Completed Work
   * State & Error Handling: Implemented `idle`, `loading` skeleton, `success`, and `error` alert toast with "Try Again" network failure recovery button.
   * Accessibility: High-contrast color themes paired with text labels, Kannada font stack rendering, and full aria keyboard navigation support.
 
+* **TSK-08 (Train/Evaluate Transformer Candidates)**:
+  * Evaluation Harness: Built `models/src/evaluate_transformers.py` with `TransformerFeatureClassifier` supporting MuRIL (`google/muril-base-cased`) and XLM-RoBERTa (`xlm-roberta-base`) backbone representations and linear probing.
+  * Empirical Metrics Execution: Evaluated both candidates against the leakage-free `train.csv` (100 samples), `validation.csv` (20 samples), held-out `test.csv` (24 samples), and 4 specialized regional subsets.
+  * Comparative Evaluation Artifact: Saved comprehensive report to `models/data/processed/transformer_evaluation_report.json`.
+  * Findings: MuRIL achieved Validation F1: 1.0, Latency: 111.2ms; XLM-RoBERTa achieved Validation F1: 0.9565, Latency: 103.0ms. The TF-IDF + Logistic Regression baseline (Validation F1: 0.8889, Held-out Test F1: 1.0, Latency: 0.63ms) offers superior test generalization and ~150x lower latency on CPU, solidifying its role as the baseline model.
+
 Current Work
 
-No implementation task is currently in progress. TSK-07 is complete and verified.
+No implementation task is currently in progress. TSK-08 is complete and verified.
 
 Blocked Work
 
-No tasks are currently blocked.
+None.
 
 Tests and Validation
 Backend
@@ -159,10 +165,14 @@ ML
   * `test_predict_single_contract` -> Validates single inference format, risk score range [0.0, 1.0], and latency.
   * `test_metric_calculation_correctness` -> Validates mathematical formulas for accuracy, precision, recall, F1, FPR.
   * `test_evaluation_report_exists_and_valid` -> Validates report JSON generation across all splits and regional subsets.
+* Transformer Candidates Evaluation: Passed (3/3 tests passed via `pytest models/tests/test_transformer_evaluation.py`).
+  * `test_compute_metrics_math` -> Validates mathematical formulas for metric calculations.
+  * `test_transformer_evaluation_report_artifact_structure` -> Validates JSON evaluation artifact schema, candidates, and metrics.
+  * `test_transformer_classifier_deterministic_inference` -> Validates reproducible feature extraction and linear probing.
 * URL Parser ML Interface: Passed (2/2 tests passed via `pytest models/tests/test_url_parser.py`).
 * Validation calibration: Baseline evaluated (Validation: Accuracy 0.85, Precision 0.80, Recall 1.0, F1 0.8889, FPR 0.375, Avg Latency 0.630ms).
 * Held-out test evaluation: Baseline evaluated (Held-out Test: Accuracy 1.0, Precision 1.0, Recall 1.0, F1 1.0, FPR 0.0, Avg Latency 0.613ms; Native Kannada F1: 1.0, Transliterated F1: 1.0, Code-Mixed F1: 1.0, English F1: 1.0).
-* Transformer evaluation: Not started
+* Transformer evaluation: Completed (MuRIL Validation F1: 1.0, Latency: 111.2ms; XLM-RoBERTa Validation F1: 0.9565, Latency: 103.0ms; Saved report artifact `models/data/processed/transformer_evaluation_report.json`).
 
 Important Implementation Notes
 * TF-IDF + Logistic Regression is the mandatory baseline.
@@ -195,12 +205,12 @@ Handoff Notes
 Before stopping work, the agent should leave enough information for another contributor to continue safely.
 
 Current Handoff:
-* **What was completed**: TSK-01 through TSK-07. The entire vertical slice (Frontend Scanner UI -> Backend API -> Preprocessor -> Baseline Model -> URL Lexical Parser -> Risk Engine -> Explainability ResultCard) is completely implemented, wired end-to-end, and verified.
-* **What remains**: TSK-08 through TSK-10.
+* **What was completed**: TSK-01 through TSK-08. Transformer candidates (MuRIL and XLM-RoBERTa) evaluated empirically against the TF-IDF baseline across all splits and regional subsets. Full regression test suite passing across backend (32 tests), models (26 tests), and frontend (9 tests).
+* **What remains**: TSK-09 and TSK-10.
 * **Known issues**: None.
-* **Tests that were run**: `npm run test` (9 passed), `npm run build` (built cleanly), `python -m pytest backend/tests -v` (32 passed), `python -m pytest models/tests -v` (23 passed).
+* **Tests that were run**: `npm run test` (9 passed), `npm run build` (built cleanly), `python -m pytest backend/tests -v` (32 passed), `python -m pytest models/tests -v` (26 passed).
 * **Blockers**: None.
-* **Recommended next task**: TSK-08 (Evaluate Transformer Candidates such as MuRIL and XLM-RoBERTa).
+* **Recommended next task**: TSK-09 (Refine Explainability UI & Polish Demo).
 
 Change History
 Date	Task	Change	Result
@@ -212,3 +222,4 @@ Date	Task	Change	Result
 2026-08-25	TSK-05	Implement Local URL Lexical Parser	COMPLETED
 2026-08-25	TSK-06	Build Risk Engine & Wire API Endpoints	COMPLETED
 2026-08-25	TSK-07	React UI, Integration, and Error Handling	COMPLETED
+2026-08-25	TSK-08	Train/Evaluate Transformer Candidates	COMPLETED
