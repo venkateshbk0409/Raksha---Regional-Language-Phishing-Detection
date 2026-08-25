@@ -17,9 +17,9 @@ PARTIAL — Some implementation exists, but the task is not yet complete.
 
 Current Phase
 
-Phase: Phase 3 — Baseline Modeling & URL Parsing
+Phase: Phase 4 — End-to-End Vertical Slice & Frontend Integration
 
-Current Focus: Ready for TSK-06: Build Risk Engine & Wire API Endpoints
+Current Focus: Ready for TSK-07: React UI, Integration, and Error Handling
 
 Last Updated: 2026-08-25
 
@@ -30,7 +30,7 @@ TSK-02	Curate initial dataset & create augments	Prajwal	COMPLETED	Curated 36 mes
 TSK-03	Implement Text Preprocessor (Lang Detect)	Prajwal	COMPLETED	Implemented TextPreprocessor with Unicode NFC normalization, script analysis, deterministic language detection (kannada, english, code-mixed, unknown), tokenization, URL preservation, and contextual Kanglish transliteration preserving English keywords.
 TSK-04	Train TF-IDF Baseline	Prajwal	COMPLETED	Trained mandatory TF-IDF (word + char n-grams) + Logistic Regression baseline on train.csv with fixed seed (42). Evaluated on validation.csv (Accuracy: 0.85, F1: 0.8889, latency: 0.63ms), held-out test.csv (Accuracy: 1.0, F1: 1.0), and 4 regional subsets. Saved artifact and report.
 TSK-05	Implement Local URL Lexical Parser	Venkatesh	COMPLETED	Built LocalUrlLexicalParser with local urllib parsing, IP detection, suspicious TLD detection, subdomain analysis, hyphen counting, @ symbol extraction, encoded characters detection, port validation, homoglyph check, and malformed URL handling. Strictly zero outbound network calls.
-TSK-06	Build Risk Engine & Wire API Endpoints	Both	NOT STARTED	
+TSK-06	Build Risk Engine & Wire API Endpoints	Both	COMPLETED	Built deterministic RiskEngine implementing formula Risk_total = (W_nlp * nlp_score) + (W_url * url_score) + Modifiers with calibrated weights and thresholds. Wired NLPService, LocalUrlLexicalParser, and RiskEngine into POST /api/v1/analyze.
 TSK-07	React UI, Integration, and Error Handling	Venkatesh	NOT STARTED	
 TSK-08	Train/Evaluate Transformer Candidates	Prajwal	NOT STARTED	
 TSK-09	Refine Explainability UI & Polish Demo	Venkatesh	NOT STARTED	
@@ -69,9 +69,14 @@ Completed Work
   * Zero Outbound Requests: 100% offline analysis with zero network, socket, or DNS resolution calls, guaranteeing strict SSRF safety.
   * Malformed URL Robustness: Graceful fallback on invalid/empty URLs returning `url_score = 0.0` and `"Malformed link detected"` indicator without crashing.
 
+* **TSK-06 (Build Risk Engine & Wire API Endpoints)**:
+  * Core Engine: Built `RiskEngine` in `backend/app/core/risk_engine.py` calculating `Risk_total = (W_nlp * nlp_score) + (W_url * url_score) + Modifiers` with calibrated thresholds (Safe < 0.40, Suspicious 0.40 - 0.74, Phishing >= 0.75).
+  * NLP Service: Built `NLPService` in `backend/app/services/nlp_service.py` managing offline model loading, input validation, URL-only detection (`nlp_score = 0.0`), and deterministic failure degradation (`nlp_score = 0.50` with indicator `"Analysis partially degraded."`).
+  * Endpoint Wiring: Wired `LocalUrlLexicalParser`, `NLPService`, and `RiskEngine` directly into `POST /api/v1/analyze`, strictly returning the 5 public response fields.
+
 Current Work
 
-No implementation task is currently in progress. TSK-05 is complete and verified.
+No implementation task is currently in progress. TSK-06 is complete and verified.
 
 Blocked Work
 
@@ -102,6 +107,19 @@ Backend
   * `test_multiple_urls_in_single_message` -> Aggregated multi-URL max risk score.
   * `test_deterministic_repeated_execution` -> 100% deterministic repeatable analysis.
   * `test_ssrf_safety_zero_network_calls` -> Verified zero socket/urlopen network calls.
+* Risk Engine & API tests: Passed (12/12 tests passed via `pytest backend/tests/test_risk_engine_and_api.py`).
+  * `test_deterministic_risk_calculation` -> 100% deterministic repeatable scoring.
+  * `test_clearly_benign_message_via_api` -> Safe classification (< 0.40) on legitimate business text.
+  * `test_clearly_phishing_message_via_api` -> Phishing classification (>= 0.75) on high-threat message + IP link.
+  * `test_high_nlp_score_no_url` -> Verified pure W_nlp=1.00 calculation when no URL is present.
+  * `test_low_nlp_score_suspicious_url` -> Verified Suspicious classification driven by high URL threat.
+  * `test_multiple_urls_aggregation_via_api` -> Captured multi-URL threat maximum.
+  * `test_malformed_url_in_message_via_api` -> Graceful handling of broken link with "Malformed link detected".
+  * `test_native_kannada_phishing_via_api` -> Classified Kannada phishing text with kannada language enum.
+  * `test_transliterated_kannada_phishing_via_api` -> Classified Kanglish phishing with appropriate risk score.
+  * `test_code_mixed_phishing_via_api` -> Classified code-mixed message with code-mixed language enum.
+  * `test_model_failure_fallback_degraded_response` -> Graceful fallback to Suspicious and "Analysis partially degraded."
+  * `test_ssrf_safety_offline_verification` -> Verified zero network/HTTP requests initiated by /analyze.
 
 Frontend
 * Component tests: Passed (5/5 tests passed via `vitest run` on `InputForm` and `ResultCard`).
@@ -169,12 +187,12 @@ Handoff Notes
 Before stopping work, the agent should leave enough information for another contributor to continue safely.
 
 Current Handoff:
-* **What was completed**: TSK-01 (Setup FE/BE repositories & basic API contract), TSK-02 (Curate initial dataset & create augments), TSK-03 (Implement Text Preprocessor / Language Detection), TSK-04 (Train TF-IDF Baseline), and TSK-05 (Implement Local URL Lexical Parser).
-* **What remains**: TSK-06 through TSK-10.
+* **What was completed**: TSK-01 through TSK-06. The complete backend analysis pipeline (Preprocessor -> Baseline Model -> Local URL Lexical Parser -> Risk Engine -> /analyze API endpoint) is fully integrated, operational, and verified.
+* **What remains**: TSK-07 through TSK-10.
 * **Known issues**: None.
-* **Tests that were run**: `python -m pytest backend/tests -v` (20 passed), `python -m pytest models/tests -v` (23 passed), `npm run test` (7 passed in 3 suites).
+* **Tests that were run**: `python -m pytest backend/tests -v` (32 passed), `python -m pytest models/tests -v` (23 passed), `npm run test` (7 passed in 3 suites).
 * **Blockers**: None.
-* **Recommended next task**: TSK-06 (Build Risk Engine & Wire API Endpoints).
+* **Recommended next task**: TSK-07 (React UI, Integration, and Error Handling).
 
 Change History
 Date	Task	Change	Result
@@ -184,4 +202,6 @@ Date	Task	Change	Result
 2026-08-25	TSK-03	Implement Text Preprocessor (Lang Detect)	COMPLETED
 2026-08-25	TSK-04	Train TF-IDF Baseline	COMPLETED
 2026-08-25	TSK-05	Implement Local URL Lexical Parser	COMPLETED
+2026-08-25	TSK-06	Build Risk Engine & Wire API Endpoints	COMPLETED
+
 
