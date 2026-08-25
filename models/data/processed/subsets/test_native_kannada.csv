@@ -1,0 +1,7 @@
+group_id,text,label,language,script,category,has_url,variant_type
+PHISH_UTIL_01,ಬೆಸ್ಕಾಂ ಎಚ್ಚರಿಕೆ: ಹಿಂದಿನ ತಿಂಗಳ ಬಿಲ್ ಪಾವತಿಸದ ಕಾರಣ ಇಂದು ರಾತ್ರಿ 9:30 ಕ್ಕೆ ನಿಮ್ಮ ವಿದ್ಯುತ್ ಸಂಪರ್ಕ ಕಡಿತಗೊಳ್ಳಲಿದೆ. ತಕ್ಷಣ ಅಧಿಕಾರಿಗೆ ಕರೆ ಮಾಡಿ: 9845123456,1,kannada,kannada,utility_bill_threat,False,native_kannada_translation
+PHISH_UTIL_05,BWSSB ನೀರು ಸರಬರಾಜು ಸೂಚನೆ: ಬಾಕಿ ಹಣ ಪಾವತಿಸದ ಕಾರಣ ನಾಳೆ ಬೆಳಗ್ಗೆಯಿಂದ ನಿಮ್ಮ ನೀರಿನ ಸಂಪರ್ಕ ಸ್ಥಗಿತಗೊಳ್ಳಲಿದೆ. ಸಂಪರ್ಕಿಸಿ: 9102938475,1,kannada,kannada,utility_bill_threat,False,native_kannada_translation
+PHISH_REW_04,"ಗೃಹಲಕ್ಷ್ಮಿ ಯೋಜನೆ: ನಿಮ್ಮ ಆಧಾರ್ ಕಾರ್ಡ್‌ಗೆ ಕರ್ನಾಟಕ ಸರ್ಕಾರ ರೂ 2,000 ಮಾಸಿಕ ಭತ್ಯೆ ಅನುಮೋದಿಸಿದೆ. ಹಣ ಪಡೆಯಲು ಕ್ಲಿಕ್ ಮಾಡಿ: http://gruhalakshmi-gov-karnataka.org",1,kannada,kannada,fake_reward_lottery,True,native_kannada_translation
+LEGIT_OTP_02,"ಸ್ವಿಗ್ಗಿಯಲ್ಲಿ ನಿಮ್ಮ HDFC ಕಾರ್ಡ್ 4091 ಬಳಸಿ ರೂ 1,200 ವಹಿವಾಟಿಗೆ OTP 849201 ಆಗಿದೆ. ಸುರಕ್ಷತೆಗಾಗಿ ಯಾರಿಗೂ ತಿಳಿಸಬೇಡಿ.",0,kannada,kannada,legitimate_otp,False,native_kannada_translation
+LEGIT_TXN_02,UPI ಎಚ್ಚರಿಕೆ: ನಂದಿನಿ ಮಿಲ್ಕ್ ಪಾರ್ಲರ್‌ಗೆ ರೂ 250 ಯಶಸ್ವಿಯಾಗಿ ಪಾವತಿಸಲಾಗಿದೆ. UPI ರೆಫರೆನ್ಸ್ 92839104819.,0,kannada,kannada,legitimate_transaction,False,native_kannada_translation
+LEGIT_PERS_01,"ನಮಸ್ಕಾರ ರಮೇಶ್, ಈ ವಾರಾಂತ್ಯದಲ್ಲಿ ಹಬ್ಬಕ್ಕಾಗಿ ಮೈಸೂರಿಗೆ ಬರುತ್ತಿದ್ದೀರಾ? ರೈಲಿನ ಸಮಯ ತಿಳಿಸಿ.",0,kannada,kannada,legitimate_personal,False,native_kannada_translation

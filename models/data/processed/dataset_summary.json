@@ -1,0 +1,45 @@
+{
+  "total_groups": 36,
+  "total_samples": 144,
+  "phishing_samples": 80,
+  "legitimate_samples": 64,
+  "splits": {
+    "train": {
+      "samples": 100,
+      "groups": 25,
+      "phishing": 56,
+      "legitimate": 44,
+      "ratio": 0.6944
+    },
+    "validation": {
+      "samples": 20,
+      "groups": 5,
+      "phishing": 12,
+      "legitimate": 8,
+      "ratio": 0.1389
+    },
+    "test": {
+      "samples": 24,
+      "groups": 6,
+      "phishing": 12,
+      "legitimate": 12,
+      "ratio": 0.1667
+    }
+  },
+  "language_distribution": {
+    "kannada": 72,
+    "english": 36,
+    "code-mixed": 36
+  },
+  "specialized_test_subsets": {
+    "test_native_kannada": 6,
+    "test_transliterated_kannada": 6,
+    "test_codemixed": 6,
+    "test_english": 6
+  },
+  "group_leakage": {
+    "train_val_overlap": 0,
+    "train_test_overlap": 0,
+    "val_test_overlap": 0
+  }
+}

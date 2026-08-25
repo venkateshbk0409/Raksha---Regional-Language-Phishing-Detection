@@ -1,0 +1,7 @@
+group_id,text,label,language,script,category,has_url,variant_type
+PHISH_UTIL_01,BESCOM warning: Electricity disconnect agatte today 9:30 PM bill pending ide. Urgent call madam/sir at 9845123456.,1,code-mixed,latin,utility_bill_threat,False,code_mixed
+PHISH_UTIL_05,BWSSB Water supply connection cut aaguttide tomorrow. Urgent call officer on 9102938475 before 8 PM.,1,code-mixed,latin,utility_bill_threat,False,code_mixed
+PHISH_REW_04,Gruha Lakshmi scheme Rs 2000 allowance approve aagide. Verify account details in this portal: http://gruhalakshmi-gov-karnataka.org,1,code-mixed,latin,fake_reward_lottery,True,code_mixed
+LEGIT_OTP_02,"HDFC Card payment of Rs 1,200 at Swiggy ge OTP 849201. Do not share OTP with anyone.",0,code-mixed,latin,legitimate_otp,False,code_mixed
+LEGIT_TXN_02,Rs 250 paid to Nandini Milk Parlour via UPI. Transaction successful aagide. Ref: 92839104819.,0,code-mixed,latin,legitimate_transaction,False,code_mixed
+LEGIT_PERS_01,"Hey Ramesh, ee weekend Mysore ge barta idira festival ge? Train timing send madi please.",0,code-mixed,latin,legitimate_personal,False,code_mixed

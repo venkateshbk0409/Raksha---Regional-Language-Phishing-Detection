@@ -1,0 +1,25 @@
+group_id,text,label,language,script,category,has_url,variant_type
+PHISH_UTIL_01,BESCOM Electricity Alert: Your power supply will be disconnected tonight at 9:30 PM due to unpaid bill. Call officer immediately at 9845123456,1,english,latin,utility_bill_threat,False,original_english
+PHISH_UTIL_01,ಬೆಸ್ಕಾಂ ಎಚ್ಚರಿಕೆ: ಹಿಂದಿನ ತಿಂಗಳ ಬಿಲ್ ಪಾವತಿಸದ ಕಾರಣ ಇಂದು ರಾತ್ರಿ 9:30 ಕ್ಕೆ ನಿಮ್ಮ ವಿದ್ಯುತ್ ಸಂಪರ್ಕ ಕಡಿತಗೊಳ್ಳಲಿದೆ. ತಕ್ಷಣ ಅಧಿಕಾರಿಗೆ ಕರೆ ಮಾಡಿ: 9845123456,1,kannada,kannada,utility_bill_threat,False,native_kannada_translation
+PHISH_UTIL_01,BESCOM Alert: Hinde tingala bill pay madada karana ivattu ratri 9:30 ge power cut madtare. Officer ge call madi: 9845123456,1,kannada,latin,utility_bill_threat,False,transliterated_kannada
+PHISH_UTIL_01,BESCOM warning: Electricity disconnect agatte today 9:30 PM bill pending ide. Urgent call madam/sir at 9845123456.,1,code-mixed,latin,utility_bill_threat,False,code_mixed
+PHISH_UTIL_05,BWSSB Water Notice: Water supply connection #90218 will be stopped from tomorrow morning due to arrears. Contact helpline 9102938475,1,english,latin,utility_bill_threat,False,original_english
+PHISH_UTIL_05,BWSSB ನೀರು ಸರಬರಾಜು ಸೂಚನೆ: ಬಾಕಿ ಹಣ ಪಾವತಿಸದ ಕಾರಣ ನಾಳೆ ಬೆಳಗ್ಗೆಯಿಂದ ನಿಮ್ಮ ನೀರಿನ ಸಂಪರ್ಕ ಸ್ಥಗಿತಗೊಳ್ಳಲಿದೆ. ಸಂಪರ್ಕಿಸಿ: 9102938475,1,kannada,kannada,utility_bill_threat,False,native_kannada_translation
+PHISH_UTIL_05,BWSSB Water Notice: Baki hana pay madada karana nale belagge water connection cut madtare. Call madi: 9102938475,1,kannada,latin,utility_bill_threat,False,transliterated_kannada
+PHISH_UTIL_05,BWSSB Water supply connection cut aaguttide tomorrow. Urgent call officer on 9102938475 before 8 PM.,1,code-mixed,latin,utility_bill_threat,False,code_mixed
+PHISH_REW_04,"Gruha Lakshmi Scheme: Karnataka Govt has approved Rs 2,000 monthly allowance for your Aadhaar card. Collect at http://gruhalakshmi-gov-karnataka.org",1,english,latin,fake_reward_lottery,True,original_english
+PHISH_REW_04,"ಗೃಹಲಕ್ಷ್ಮಿ ಯೋಜನೆ: ನಿಮ್ಮ ಆಧಾರ್ ಕಾರ್ಡ್‌ಗೆ ಕರ್ನಾಟಕ ಸರ್ಕಾರ ರೂ 2,000 ಮಾಸಿಕ ಭತ್ಯೆ ಅನುಮೋದಿಸಿದೆ. ಹಣ ಪಡೆಯಲು ಕ್ಲಿಕ್ ಮಾಡಿ: http://gruhalakshmi-gov-karnataka.org",1,kannada,kannada,fake_reward_lottery,True,native_kannada_translation
+PHISH_REW_04,"Gruha Lakshmi Yojana: Nimma Aadhaar card ge Karnataka sarkar Rs 2,000 approve madide. Hana padayalu click madi: http://gruhalakshmi-gov-karnataka.org",1,kannada,latin,fake_reward_lottery,True,transliterated_kannada
+PHISH_REW_04,Gruha Lakshmi scheme Rs 2000 allowance approve aagide. Verify account details in this portal: http://gruhalakshmi-gov-karnataka.org,1,code-mixed,latin,fake_reward_lottery,True,code_mixed
+LEGIT_OTP_02,"Your OTP for transaction of Rs 1,200 at Swiggy using HDFC Card ending 4091 is 849201. Do not share OTP for your security.",0,english,latin,legitimate_otp,False,original_english
+LEGIT_OTP_02,"ಸ್ವಿಗ್ಗಿಯಲ್ಲಿ ನಿಮ್ಮ HDFC ಕಾರ್ಡ್ 4091 ಬಳಸಿ ರೂ 1,200 ವಹಿವಾಟಿಗೆ OTP 849201 ಆಗಿದೆ. ಸುರಕ್ಷತೆಗಾಗಿ ಯಾರಿಗೂ ತಿಳಿಸಬೇಡಿ.",0,kannada,kannada,legitimate_otp,False,native_kannada_translation
+LEGIT_OTP_02,Swiggy alli HDFC card 4091 inda Rs 1200 payment ge OTP 849201 aagide. Yarigu share madbedi.,0,kannada,latin,legitimate_otp,False,transliterated_kannada
+LEGIT_OTP_02,"HDFC Card payment of Rs 1,200 at Swiggy ge OTP 849201. Do not share OTP with anyone.",0,code-mixed,latin,legitimate_otp,False,code_mixed
+LEGIT_TXN_02,UPI Alert: Rs 250 paid successfully to Nandini Milk Parlour from GPay UPI Ref 92839104819. Clear balance in your account.,0,english,latin,legitimate_transaction,False,original_english
+LEGIT_TXN_02,UPI ಎಚ್ಚರಿಕೆ: ನಂದಿನಿ ಮಿಲ್ಕ್ ಪಾರ್ಲರ್‌ಗೆ ರೂ 250 ಯಶಸ್ವಿಯಾಗಿ ಪಾವತಿಸಲಾಗಿದೆ. UPI ರೆಫರೆನ್ಸ್ 92839104819.,0,kannada,kannada,legitimate_transaction,False,native_kannada_translation
+LEGIT_TXN_02,UPI Alert: Nandini Milk Parlour ge Rs 250 successfully pay aagide. UPI Ref 92839104819.,0,kannada,latin,legitimate_transaction,False,transliterated_kannada
+LEGIT_TXN_02,Rs 250 paid to Nandini Milk Parlour via UPI. Transaction successful aagide. Ref: 92839104819.,0,code-mixed,latin,legitimate_transaction,False,code_mixed
+LEGIT_PERS_01,"Hi Ramesh, are you coming to Mysore this weekend for the festival? Let me know the train timing.",0,english,latin,legitimate_personal,False,original_english
+LEGIT_PERS_01,"ನಮಸ್ಕಾರ ರಮೇಶ್, ಈ ವಾರಾಂತ್ಯದಲ್ಲಿ ಹಬ್ಬಕ್ಕಾಗಿ ಮೈಸೂರಿಗೆ ಬರುತ್ತಿದ್ದೀರಾ? ರೈಲಿನ ಸಮಯ ತಿಳಿಸಿ.",0,kannada,kannada,legitimate_personal,False,native_kannada_translation
+LEGIT_PERS_01,"Namaskara Ramesh, ee weekend habbakke Mysurige bartheera? Train timing heli.",0,kannada,latin,legitimate_personal,False,transliterated_kannada
+LEGIT_PERS_01,"Hey Ramesh, ee weekend Mysore ge barta idira festival ge? Train timing send madi please.",0,code-mixed,latin,legitimate_personal,False,code_mixed

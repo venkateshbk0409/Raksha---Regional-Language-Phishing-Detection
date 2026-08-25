@@ -1,0 +1,21 @@
+group_id,text,label,language,script,category,has_url,variant_type
+PHISH_KYC_05,Axis Bank: Your mobile number verification is pending. Verify immediately to continue UPI services: http://axis-upi-verify.biz,1,english,latin,kyc_fraud,True,original_english
+PHISH_KYC_05,ಆಕ್ಸಿಸ್ ಬ್ಯಾಂಕ್: ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಪರಿಶೀಲನೆ ಬಾಕಿ ಇದೆ. UPI ಸೇವೆ ಮುಂದುವರಿಸಲು ತಕ್ಷಣ ಪರಿಶೀಲಿಸಿ: http://axis-upi-verify.biz,1,kannada,kannada,kyc_fraud,True,native_kannada_translation
+PHISH_KYC_05,Axis Bank: Nimma mobile number verification baki ide. UPI service continue madoke eegale verify madi: http://axis-upi-verify.biz,1,kannada,latin,kyc_fraud,True,transliterated_kannada
+PHISH_KYC_05,Axis Bank notice: Mobile number verify aagilla. UPI stop agutte eegale link open madi: http://axis-upi-verify.biz,1,code-mixed,latin,kyc_fraud,True,code_mixed
+PHISH_UTIL_02,"MESCOM Department: Power cut scheduled for meter #482910. Clear dues of Rs 1,450 to avoid penalty: http://mescom-bill-clear.in",1,english,latin,utility_bill_threat,True,original_english
+PHISH_UTIL_02,"ಮೆಸ್ಕಾಂ ಇಲಾಖೆ: ಮೀಟರ್ ಸಂಖ್ಯೆ #482910 ಗೆ ವಿದ್ಯುತ್ ಕಡಿತ ನಿಗದಿಯಾಗಿದೆ. ದಂಡ ತಪ್ಪಿಸಲು ರೂ 1,450 ಪಾವತಿಸಿ: http://mescom-bill-clear.in",1,kannada,kannada,utility_bill_threat,True,native_kannada_translation
+PHISH_UTIL_02,"MESCOM Ilakhe: Meter no #482910 ge power cut schedule aagide. Danda thapisalu Rs 1,450 kattiri: http://mescom-bill-clear.in",1,kannada,latin,utility_bill_threat,True,transliterated_kannada
+PHISH_UTIL_02,MESCOM Alert: Nimma meter power cut agbeka? Clear Rs 1450 dues instantly at http://mescom-bill-clear.in immediately.,1,code-mixed,latin,utility_bill_threat,True,code_mixed
+PHISH_REW_02,"PM Kisan Yojana: Rs 6,000 installment is pending in your bank account. Verify bank details to deposit: http://pmkisan-yojana-credit.org",1,english,latin,fake_reward_lottery,True,original_english
+PHISH_REW_02,"ಪಿಎಂ ಕಿಸಾನ್ ಯೋಜನೆ: ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ರೂ 6,000 ಕಂತು ಜಮೆಯಾಗಲು ಬಾಕಿ ಇದೆ. ಹಣ ಪಡೆಯಲು ವಿವರ ನಮೂದಿಸಿ: http://pmkisan-yojana-credit.org",1,kannada,kannada,fake_reward_lottery,True,native_kannada_translation
+PHISH_REW_02,"PM Kisan Yojana: Nimma bank account ge Rs 6,000 hana jama aagalu bank details verify maadi: http://pmkisan-yojana-credit.org",1,kannada,latin,fake_reward_lottery,True,transliterated_kannada
+PHISH_REW_02,PM Kisan Yojana hana Rs 6000 release aagide. Nimma account number enter madi receive madikolli: http://pmkisan-yojana-credit.org,1,code-mixed,latin,fake_reward_lottery,True,code_mixed
+LEGIT_OTP_01,"739281 is your OTP for SBI net banking login. Valid for 5 minutes. Never share this OTP with anyone, including bank staff.",0,english,latin,legitimate_otp,False,original_english
+LEGIT_OTP_01,739281 ನಿಮ್ಮ SBI ನೆಟ್ ಬ್ಯಾಂಕಿಂಗ್ ಲಾಗಿನ್ OTP ಆಗಿದೆ. 5 ನಿಮಿಷಗಳವರೆಗೆ ಮಾನ್ಯವಾಗಿರುತ್ತದೆ. ಬ್ಯಾಂಕ್ ಅಧಿಕಾರಿಗಳು ಸೇರಿದಂತೆ ಯಾರಿಗೂ OTP ಹಂಚಿಕೊಳ್ಳಬೇಡಿ.,0,kannada,kannada,legitimate_otp,False,native_kannada_translation
+LEGIT_OTP_01,739281 nimma SBI net banking login OTP. 5 nimisha valid ide. Yarigoo OTP share madbedi.,0,kannada,latin,legitimate_otp,False,transliterated_kannada
+LEGIT_OTP_01,739281 is your secret OTP for SBI login. 5 mins validity. Yarigoo share madbeda even bank officials.,0,code-mixed,latin,legitimate_otp,False,code_mixed
+LEGIT_PERS_04,I have shared the project presentation document over email. Please review and share your feedback.,0,english,latin,legitimate_personal,False,original_english
+LEGIT_PERS_04,ನಾನು ಯೋಜನೆಯ ಪ್ರಸ್ತುತಿ ದಾಖಲೆಯನ್ನು ಇಮೇಲ್ ಮೂಲಕ ಹಂಚಿಕೊಂಡಿದ್ದೇನೆ. ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ ನಿಮ್ಮ ಅಭಿಪ್ರಾಯ ತಿಳಿಸಿ.,0,kannada,kannada,legitimate_personal,False,native_kannada_translation
+LEGIT_PERS_04,Nanu project presentation document email alli share madiddini. Review madi feedback thilisi.,0,kannada,latin,legitimate_personal,False,transliterated_kannada
+LEGIT_PERS_04,Project presentation document email kalsidini. Please nodi feedback share madi.,0,code-mixed,latin,legitimate_personal,False,code_mixed
