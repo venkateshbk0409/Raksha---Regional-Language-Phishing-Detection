@@ -17,9 +17,9 @@ PARTIAL — Some implementation exists, but the task is not yet complete.
 
 Current Phase
 
-Phase: Phase 2 — Dataset Curation & Preprocessing
+Phase: Phase 3 — Baseline Modeling & URL Parsing
 
-Current Focus: Ready for TSK-04: Train TF-IDF Baseline
+Current Focus: Ready for TSK-05: Implement Local URL Lexical Parser
 
 Last Updated: 2026-08-25
 
@@ -28,7 +28,7 @@ Task ID	Description	Owner	Status	Notes
 TSK-01	Setup FE/BE repositories & basic API contract	Venkatesh	COMPLETED	Scaffolded FastAPI backend and React + Vite frontend with Tailwind design system, strict API schema contracts, rate limiting, and test suites.
 TSK-02	Curate initial dataset & create augments	Prajwal	COMPLETED	Curated 36 message groups (144 samples) with Kannada translations, transliterations, and code-mixing. Group-split (70/15/15) with verified 0% leakage and specialized test subsets.
 TSK-03	Implement Text Preprocessor (Lang Detect)	Prajwal	COMPLETED	Implemented TextPreprocessor with Unicode NFC normalization, script analysis, deterministic language detection (kannada, english, code-mixed, unknown), tokenization, URL preservation, and contextual Kanglish transliteration preserving English keywords.
-TSK-04	Train TF-IDF Baseline	Prajwal	NOT STARTED	
+TSK-04	Train TF-IDF Baseline	Prajwal	COMPLETED	Trained mandatory TF-IDF (word + char n-grams) + Logistic Regression baseline on train.csv with fixed seed (42). Evaluated on validation.csv (Accuracy: 0.85, F1: 0.8889, latency: 0.63ms), held-out test.csv (Accuracy: 1.0, F1: 1.0), and 4 regional subsets. Saved artifact and report.
 TSK-05	Implement Local URL Lexical Parser	Venkatesh	NOT STARTED	
 TSK-06	Build Risk Engine & Wire API Endpoints	Both	NOT STARTED	
 TSK-07	React UI, Integration, and Error Handling	Venkatesh	NOT STARTED	
@@ -57,9 +57,15 @@ Completed Work
   * Contextual Transliteration: Implemented high-confidence Kanglish standardization (`nimma` -> `ನಿಮ್ಮ`, `madi` -> `ಮಾಡಿ`, `koodale` -> `ಕೂಡಲೇ`) while strictly preserving English keywords (`account`, `bank`, `update`, `password`, `login`, `urgent`, `link`).
   * Sanitization & URL Handling: NFC Unicode normalization, non-printable control character removal, whitespace normalization, and safe URL extraction preserving tokens.
 
+* **TSK-04 (Train TF-IDF Baseline)**:
+  * Model Architecture: Built `RakshaBaselineClassifier` combining FeatureUnion (word n-grams (1,2) + char_wb n-grams (3,5)) and Logistic Regression (`C=1.0`, `class_weight='balanced'`, `random_state=42`).
+  * Training Pipeline: Built `models/src/train_baseline.py` training exclusively on `train.csv` (100 samples) and validating on `validation.csv` (20 samples) and held-out `test.csv` (24 samples).
+  * Serialization & Export: Serialized model artifact to `models/saved_models/baseline_tfidf/` with parameter metadata (`baseline_model.joblib` ignored by `.gitignore`).
+  * Empirical Metrics Generation: Exported full multi-split and regional subset metrics to `models/data/processed/baseline_evaluation_report.json`.
+
 Current Work
 
-No implementation task is currently in progress. TSK-03 is complete and verified.
+No implementation task is currently in progress. TSK-04 is complete and verified.
 
 Blocked Work
 
@@ -100,10 +106,16 @@ ML
   * `test_english_token_preservation_in_transliteration` -> Preserved English keywords and transliterated Kanglish roots.
   * `test_url_extraction` -> Accurate URL pattern extraction.
   * `test_deterministic_preprocessing` -> Exact reproducible output across runs.
-* TF-IDF baseline: Not started
+* TF-IDF baseline: Passed (6/6 tests passed via `pytest models/tests/test_baseline.py`).
+  * `test_baseline_training_and_convergence` -> Fits and converges cleanly on training data.
+  * `test_baseline_serialization_and_loading` -> Serializes to joblib and loads with bit-for-bit identical probabilities.
+  * `test_baseline_reproducibility` -> Fixed random_state (42) guarantees deterministic weights and predictions.
+  * `test_predict_single_contract` -> Validates single inference format, risk score range [0.0, 1.0], and latency.
+  * `test_metric_calculation_correctness` -> Validates mathematical formulas for accuracy, precision, recall, F1, FPR.
+  * `test_evaluation_report_exists_and_valid` -> Validates report JSON generation across all splits and regional subsets.
+* Validation calibration: Baseline evaluated (Validation: Accuracy 0.85, Precision 0.80, Recall 1.0, F1 0.8889, FPR 0.375, Avg Latency 0.630ms).
+* Held-out test evaluation: Baseline evaluated (Held-out Test: Accuracy 1.0, Precision 1.0, Recall 1.0, F1 1.0, FPR 0.0, Avg Latency 0.613ms; Native Kannada F1: 1.0, Transliterated F1: 1.0, Code-Mixed F1: 1.0, English F1: 1.0).
 * Transformer evaluation: Not started
-* Validation calibration: Not started
-* Held-out test evaluation: Not started
 
 Important Implementation Notes
 * TF-IDF + Logistic Regression is the mandatory baseline.
@@ -136,12 +148,12 @@ Handoff Notes
 Before stopping work, the agent should leave enough information for another contributor to continue safely.
 
 Current Handoff:
-* **What was completed**: TSK-01 (Setup FE/BE repositories & basic API contract), TSK-02 (Curate initial dataset & create augments), and TSK-03 (Implement Text Preprocessor / Language Detection).
-* **What remains**: TSK-04 through TSK-10.
+* **What was completed**: TSK-01 (Setup FE/BE repositories & basic API contract), TSK-02 (Curate initial dataset & create augments), TSK-03 (Implement Text Preprocessor / Language Detection), and TSK-04 (Train TF-IDF Baseline).
+* **What remains**: TSK-05 through TSK-10.
 * **Known issues**: None.
-* **Tests that were run**: `python -m pytest models/tests -v` (15 passed), `python -m pytest backend/tests -v` (7 passed), `npm run test` (7 passed in 3 suites).
+* **Tests that were run**: `python -m pytest models/tests -v` (21 passed), `python -m pytest backend/tests -v` (7 passed), `npm run test` (7 passed in 3 suites).
 * **Blockers**: None.
-* **Recommended next task**: TSK-04 (Train TF-IDF Baseline).
+* **Recommended next task**: TSK-05 (Implement Local URL Lexical Parser).
 
 Change History
 Date	Task	Change	Result
@@ -149,3 +161,4 @@ Date	Task	Change	Result
 2026-08-25	TSK-01	Setup FE/BE repositories & basic API contract	COMPLETED
 2026-08-25	TSK-02	Curate initial dataset & create augments	COMPLETED
 2026-08-25	TSK-03	Implement Text Preprocessor (Lang Detect)	COMPLETED
+2026-08-25	TSK-04	Train TF-IDF Baseline	COMPLETED
