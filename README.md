@@ -89,24 +89,23 @@ Instead of providing only a classification, Raksha is intended to explain why a 
 | Area | Technology |
 |---|---|
 | Programming | Python |
-| NLP / AI | Hugging Face Transformers |
-| Multilingual Models | MuRIL / XLM-RoBERTa |
-| Machine Learning | scikit-learn |
+| Machine Learning | scikit-learn (Mandatory baseline: TF-IDF + Logistic Regression) |
+| Multilingual Models | Hugging Face Transformers (Candidate evaluation: MuRIL / XLM-RoBERTa vs. baseline) |
 | Language Processing | Indic language processing + transliteration/code-mix handling |
-| URL Analysis | Python URL parsing + feature extraction |
-| Backend | FastAPI |
+| URL Analysis | Python URL parsing + local lexical feature extraction (no external network calls) |
+| Backend | FastAPI (Stateless monolith) |
 | Frontend | React + Vite |
-| Database | MongoDB Atlas |
+| Database | Stateless MVP (MongoDB Atlas strictly as optional telemetry if time permits) |
 | Development | VS Code, Jupyter Notebook |
 | Version Control | Git + GitHub |
 
 ## Model Development Approach
 
-The proposed implementation will begin with a baseline model using:
+The implementation mandates a baseline model using:
 
-TF-IDF + Logistic Regression
+**TF-IDF + Logistic Regression**
 
-This baseline will then be compared with a multilingual transformer-based approach.
+Candidate multilingual transformer models (such as MuRIL and XLM-RoBERTa) will then be evaluated against this mandatory baseline.
 
 The models will be evaluated using:
 
@@ -114,8 +113,9 @@ The models will be evaluated using:
 - Recall
 - F1-score
 - False-positive rate
+- Inference latency
 
-The stronger approach will be selected based on the evaluation results and suitability for the proposed system.
+Final model selection will depend strictly on empirical evaluation metrics.
 
 ## Project Scope
 
@@ -178,12 +178,13 @@ No working prototype is being claimed at this stage. The implementation will be 
 
 ```text
 raksha/
+├── backend/          # FastAPI monolithic backend
+├── frontend/         # React + Vite single-page frontend
+├── models/           # Training scripts, notebooks & baseline models
+├── docs/             # Project documentation
+├── .agent-spec/docs/ # Local implementation specifications
 ├── README.md
-├── .gitignore
-└── docs/
-    ├── architecture/
-    └── proposal/
-
+└── .gitignore
 ```
 The repository structure will evolve as implementation progresses.
 
