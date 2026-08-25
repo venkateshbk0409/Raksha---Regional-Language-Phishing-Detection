@@ -30,3 +30,13 @@ Thumbs.db
 *.joblib
 *.pt
 *.pth
+
+# ML / generated files
+*.pkl
+*.joblib
+*.pt
+*.pth
+
+# Agent specification files (local-only)
+.agent-spec/
+AGENTS.md
