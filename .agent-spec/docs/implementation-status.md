@@ -33,7 +33,7 @@ TSK-05	Implement Local URL Lexical Parser	Venkatesh	COMPLETED	Built LocalUrlLexi
 TSK-06	Build Risk Engine & Wire API Endpoints	Both	COMPLETED	Built deterministic RiskEngine implementing formula Risk_total = (W_nlp * nlp_score) + (W_url * url_score) + Modifiers with calibrated weights and thresholds. Wired NLPService, LocalUrlLexicalParser, and RiskEngine into POST /api/v1/analyze.
 TSK-07	React UI, Integration, and Error Handling	Venkatesh	COMPLETED	Built and refined React scanner UI integrating POST /api/v1/analyze with semantic color indicators, risk meter, detected language badge, threat signals list, recommended actions, loading skeleton, error banner with retry recovery, and 9 passing Vitest tests.
 TSK-08	Train/Evaluate Transformer Candidates	Prajwal	COMPLETED	Evaluated transformer candidates (MuRIL google/muril-base-cased and XLM-RoBERTa xlm-roberta-base) against TF-IDF baseline across Validation split, Held-out Test split, and 4 Regional Subsets. Recorded empirical metrics (MuRIL Val F1: 1.0, Latency: 111.2ms; XLM-RoBERTa Val F1: 0.9565, Latency: 103.0ms; Baseline Val F1: 0.8889, Test F1: 1.0, Latency: 0.63ms). Confirmed baseline superiority for fast, lightweight inference.
-TSK-09	Refine Explainability UI & Polish Demo	Venkatesh	NOT STARTED	
+TSK-09	Refine Explainability UI & Polish Demo	Venkatesh	COMPLETED	Polished explainability UI with categorized threat signals, interactive indicator tooltips/popovers, qualitative risk gauge meter zones, actionable guidance copy-to-clipboard, interactive regional demo preset scenarios, Ctrl+Enter keyboard submission, and expanded architecture methodology documentation on AboutPage.
 TSK-10	MongoDB Telemetry Integration	Both	NOT STARTED	
 
 Completed Work
@@ -86,9 +86,15 @@ Completed Work
   * Comparative Evaluation Artifact: Saved comprehensive report to `models/data/processed/transformer_evaluation_report.json`.
   * Findings: MuRIL achieved Validation F1: 1.0, Latency: 111.2ms; XLM-RoBERTa achieved Validation F1: 0.9565, Latency: 103.0ms. The TF-IDF + Logistic Regression baseline (Validation F1: 0.8889, Held-out Test F1: 1.0, Latency: 0.63ms) offers superior test generalization and ~150x lower latency on CPU, solidifying its role as the baseline model.
 
+* **TSK-09 (Refine Explainability UI & Polish Demo)**:
+  * Signal Explainability: Built comprehensive indicator categorization in `IndicatorBadge.jsx` with signal tooltips explaining *why* specific patterns (e.g. IP hosts, unverified TLDs, urgency phrasing, transliteration tricks) introduce risk.
+  * Result Card Polish: Enhanced `ResultCard.jsx` with qualitative score zones (Safe, Suspicious, Phishing), localized script labels, actionable advice copy-to-clipboard button, and high-contrast responsive layout.
+  * Demo Presets & Usability: Enhanced `InputForm.jsx` with interactive regional scenario presets (Kannada KYC scam, Kanglish electricity cut-off, lottery fraud, benign OTP, utility receipt), character counter meter, and `Ctrl+Enter` keyboard shortcut.
+  * Architecture & Methodology: Refined `AboutPage.jsx` with dual-track architecture documentation, deterministic risk formulas, indicator reference, and security FAQ.
+
 Current Work
 
-No implementation task is currently in progress. TSK-08 is complete and verified.
+No implementation task is currently in progress. TSK-09 is complete and verified.
 
 Blocked Work
 
@@ -134,11 +140,11 @@ Backend
   * `test_ssrf_safety_offline_verification` -> Verified zero network/HTTP requests initiated by /analyze.
 
 Frontend
+* Frontend build: Passed (`npm run build` completed cleanly without errors).
 * Component & Integration tests: Passed (9/9 tests passed via `vitest run` on `InputForm`, `ResultCard`, and `ScannerPage`).
-  * `InputForm.test.jsx` (3 tests) -> Character count rendering, sample chip clicks, empty submission prevention.
-  * `ResultCard.test.jsx` (3 tests) -> Safe, Suspicious, and Phishing rendering, language badges, and reset handler.
-  * `ScannerPage.test.jsx` (3 tests) -> Full analyze success flow, network error recovery flow with "Try Again" retry, and sample prompt population.
-* Production build: Passed (`npm run build` generated production bundle cleanly in 7.97s).
+  * `ResultCard.test.jsx` (3 tests: Safe/Suspicious/Phishing badge and risk score rendering, tooltip popover interaction, copy advice action, reset button handler).
+  * `InputForm.test.jsx` (3 tests: character count rendering, sample chip clicks, empty submission prevention).
+  * `ScannerPage.test.jsx` (3 tests: Full analyze success flow, network error recovery flow with "Try Again" retry, and sample prompt population).
 
 ML
 * Dataset preparation: Passed (5/5 tests passed via `pytest models/tests/test_dataset.py`).
@@ -205,12 +211,12 @@ Handoff Notes
 Before stopping work, the agent should leave enough information for another contributor to continue safely.
 
 Current Handoff:
-* **What was completed**: TSK-01 through TSK-08. Transformer candidates (MuRIL and XLM-RoBERTa) evaluated empirically against the TF-IDF baseline across all splits and regional subsets. Full regression test suite passing across backend (32 tests), models (26 tests), and frontend (9 tests).
-* **What remains**: TSK-09 and TSK-10.
+* **What was completed**: TSK-01 through TSK-09. Polished explainability UI with threat category mappings, interactive indicator tooltips, calibrated risk index zones, copy-to-clipboard action guidance, regional demo presets, and full regression test suite passing across backend (32 tests), models (26 tests), and frontend (9 tests).
+* **What remains**: TSK-10 (MongoDB Telemetry Integration — IF TIME).
 * **Known issues**: None.
 * **Tests that were run**: `npm run test` (9 passed), `npm run build` (built cleanly), `python -m pytest backend/tests -v` (32 passed), `python -m pytest models/tests -v` (26 passed).
 * **Blockers**: None.
-* **Recommended next task**: TSK-09 (Refine Explainability UI & Polish Demo).
+* **Recommended next task**: TSK-10 (MongoDB Telemetry Integration if opted for by user/time).
 
 Change History
 Date	Task	Change	Result
@@ -223,3 +229,4 @@ Date	Task	Change	Result
 2026-08-25	TSK-06	Build Risk Engine & Wire API Endpoints	COMPLETED
 2026-08-25	TSK-07	React UI, Integration, and Error Handling	COMPLETED
 2026-08-25	TSK-08	Train/Evaluate Transformer Candidates	COMPLETED
+2026-08-25	TSK-09	Refine Explainability UI & Polish Demo	COMPLETED
