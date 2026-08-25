@@ -19,7 +19,7 @@ Current Phase
 
 Phase: Phase 3 — Baseline Modeling & URL Parsing
 
-Current Focus: Ready for TSK-05: Implement Local URL Lexical Parser
+Current Focus: Ready for TSK-06: Build Risk Engine & Wire API Endpoints
 
 Last Updated: 2026-08-25
 
@@ -29,7 +29,7 @@ TSK-01	Setup FE/BE repositories & basic API contract	Venkatesh	COMPLETED	Scaffol
 TSK-02	Curate initial dataset & create augments	Prajwal	COMPLETED	Curated 36 message groups (144 samples) with Kannada translations, transliterations, and code-mixing. Group-split (70/15/15) with verified 0% leakage and specialized test subsets.
 TSK-03	Implement Text Preprocessor (Lang Detect)	Prajwal	COMPLETED	Implemented TextPreprocessor with Unicode NFC normalization, script analysis, deterministic language detection (kannada, english, code-mixed, unknown), tokenization, URL preservation, and contextual Kanglish transliteration preserving English keywords.
 TSK-04	Train TF-IDF Baseline	Prajwal	COMPLETED	Trained mandatory TF-IDF (word + char n-grams) + Logistic Regression baseline on train.csv with fixed seed (42). Evaluated on validation.csv (Accuracy: 0.85, F1: 0.8889, latency: 0.63ms), held-out test.csv (Accuracy: 1.0, F1: 1.0), and 4 regional subsets. Saved artifact and report.
-TSK-05	Implement Local URL Lexical Parser	Venkatesh	NOT STARTED	
+TSK-05	Implement Local URL Lexical Parser	Venkatesh	COMPLETED	Built LocalUrlLexicalParser with local urllib parsing, IP detection, suspicious TLD detection, subdomain analysis, hyphen counting, @ symbol extraction, encoded characters detection, port validation, homoglyph check, and malformed URL handling. Strictly zero outbound network calls.
 TSK-06	Build Risk Engine & Wire API Endpoints	Both	NOT STARTED	
 TSK-07	React UI, Integration, and Error Handling	Venkatesh	NOT STARTED	
 TSK-08	Train/Evaluate Transformer Candidates	Prajwal	NOT STARTED	
@@ -63,9 +63,15 @@ Completed Work
   * Serialization & Export: Serialized model artifact to `models/saved_models/baseline_tfidf/` with parameter metadata (`baseline_model.joblib` ignored by `.gitignore`).
   * Empirical Metrics Generation: Exported full multi-split and regional subset metrics to `models/data/processed/baseline_evaluation_report.json`.
 
+* **TSK-05 (Implement Local URL Lexical Parser)**:
+  * Service Implementation: Built `LocalUrlLexicalParser` in `backend/app/services/url_service.py` (and export in `models/src/url_parser.py`) implementing comprehensive offline lexical feature extraction.
+  * Extracted Signals: IP address hostname detection, suspicious TLD detection (e.g. `.xyz`, `.top`, `.tk`), excessive subdomains ($\ge 3$), excessive hyphens ($\ge 2$), `@` symbol userinfo detection, percent-encoded/obfuscated characters, non-standard ports, homoglyphs/punycode, suspicious keywords in path/query, URL length, and insecure HTTP scheme.
+  * Zero Outbound Requests: 100% offline analysis with zero network, socket, or DNS resolution calls, guaranteeing strict SSRF safety.
+  * Malformed URL Robustness: Graceful fallback on invalid/empty URLs returning `url_score = 0.0` and `"Malformed link detected"` indicator without crashing.
+
 Current Work
 
-No implementation task is currently in progress. TSK-04 is complete and verified.
+No implementation task is currently in progress. TSK-05 is complete and verified.
 
 Blocked Work
 
@@ -74,14 +80,28 @@ No tasks are currently blocked.
 Tests and Validation
 Backend
 * Unit tests: Passed (Pydantic schema constraints and settings parsing).
-* API/integration tests: Passed (7/7 tests passed via `pytest backend/tests`).
+* API/integration tests: Passed (7/7 tests passed via `pytest backend/tests/test_api_contract.py`).
   * `test_health_check` -> 200 OK
   * `test_analyze_valid_text_contract` -> 200 OK with exact 5 public fields
   * `test_analyze_empty_input_returns_422` -> 422 with standard `validation_error`
   * `test_analyze_whitespace_only_returns_422` -> 422 with standard `validation_error`
   * `test_analyze_oversized_input_returns_400` -> 400 with standard `validation_error` (>2000 chars)
   * `test_analyze_missing_content_field_returns_422` -> 422 with standard `validation_error`
-* Security tests: Passed (`test_analyze_ssrf_safety_local_ips` verified no outbound network requests made when receiving private/localhost IP URLs).
+  * `test_analyze_ssrf_safety_local_ips` -> Verified SSRF safety with localhost/private IPs.
+* URL Lexical Parser tests: Passed (13/13 tests passed via `pytest backend/tests/test_url_service.py`).
+  * `test_normal_https_url` -> Verified benign HTTPS URL properties.
+  * `test_insecure_http_url` -> Insecure HTTP indicator flagged.
+  * `test_ip_address_host` -> IPv4/IPv6 address host flagged (+0.40).
+  * `test_excessive_subdomains` -> Flagged $\ge 3$ subdomains.
+  * `test_suspicious_long_path_and_query` -> Flagged deep paths and keywords.
+  * `test_at_symbol_in_url` -> Flagged misleading `@` symbol.
+  * `test_encoded_characters` -> Flagged percent-encoded obfuscation.
+  * `test_suspicious_tld` -> Flagged high-abuse TLDs.
+  * `test_malformed_url_handling` -> Safe handling of empty/malformed URLs without crash.
+  * `test_empty_and_no_url_input` -> Safe handling of non-URL texts (`has_url=False`, `url_score=0.0`).
+  * `test_multiple_urls_in_single_message` -> Aggregated multi-URL max risk score.
+  * `test_deterministic_repeated_execution` -> 100% deterministic repeatable analysis.
+  * `test_ssrf_safety_zero_network_calls` -> Verified zero socket/urlopen network calls.
 
 Frontend
 * Component tests: Passed (5/5 tests passed via `vitest run` on `InputForm` and `ResultCard`).
@@ -113,6 +133,7 @@ ML
   * `test_predict_single_contract` -> Validates single inference format, risk score range [0.0, 1.0], and latency.
   * `test_metric_calculation_correctness` -> Validates mathematical formulas for accuracy, precision, recall, F1, FPR.
   * `test_evaluation_report_exists_and_valid` -> Validates report JSON generation across all splits and regional subsets.
+* URL Parser ML Interface: Passed (2/2 tests passed via `pytest models/tests/test_url_parser.py`).
 * Validation calibration: Baseline evaluated (Validation: Accuracy 0.85, Precision 0.80, Recall 1.0, F1 0.8889, FPR 0.375, Avg Latency 0.630ms).
 * Held-out test evaluation: Baseline evaluated (Held-out Test: Accuracy 1.0, Precision 1.0, Recall 1.0, F1 1.0, FPR 0.0, Avg Latency 0.613ms; Native Kannada F1: 1.0, Transliterated F1: 1.0, Code-Mixed F1: 1.0, English F1: 1.0).
 * Transformer evaluation: Not started
@@ -148,12 +169,12 @@ Handoff Notes
 Before stopping work, the agent should leave enough information for another contributor to continue safely.
 
 Current Handoff:
-* **What was completed**: TSK-01 (Setup FE/BE repositories & basic API contract), TSK-02 (Curate initial dataset & create augments), TSK-03 (Implement Text Preprocessor / Language Detection), and TSK-04 (Train TF-IDF Baseline).
-* **What remains**: TSK-05 through TSK-10.
+* **What was completed**: TSK-01 (Setup FE/BE repositories & basic API contract), TSK-02 (Curate initial dataset & create augments), TSK-03 (Implement Text Preprocessor / Language Detection), TSK-04 (Train TF-IDF Baseline), and TSK-05 (Implement Local URL Lexical Parser).
+* **What remains**: TSK-06 through TSK-10.
 * **Known issues**: None.
-* **Tests that were run**: `python -m pytest models/tests -v` (21 passed), `python -m pytest backend/tests -v` (7 passed), `npm run test` (7 passed in 3 suites).
+* **Tests that were run**: `python -m pytest backend/tests -v` (20 passed), `python -m pytest models/tests -v` (23 passed), `npm run test` (7 passed in 3 suites).
 * **Blockers**: None.
-* **Recommended next task**: TSK-05 (Implement Local URL Lexical Parser).
+* **Recommended next task**: TSK-06 (Build Risk Engine & Wire API Endpoints).
 
 Change History
 Date	Task	Change	Result
@@ -161,4 +182,6 @@ Date	Task	Change	Result
 2026-08-25	TSK-01	Setup FE/BE repositories & basic API contract	COMPLETED
 2026-08-25	TSK-02	Curate initial dataset & create augments	COMPLETED
 2026-08-25	TSK-03	Implement Text Preprocessor (Lang Detect)	COMPLETED
-2026-08-25	TSK-04	Train TF-IDF Baseline	COMPLETED
+2026-08-25	TSK-04	Train TF-IDF Baseline	COMPLETED
+2026-08-25	TSK-05	Implement Local URL Lexical Parser	COMPLETED
+
