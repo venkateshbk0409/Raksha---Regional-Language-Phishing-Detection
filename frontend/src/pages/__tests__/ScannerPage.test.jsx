@@ -12,10 +12,10 @@ describe("ScannerPage Integration", () => {
   it("handles successful analysis flow and displays result", async () => {
     const mockApiResponse = {
       classification: "Safe",
-      risk_score: 0.0,
+      risk_score: 0.05,
       language_detected: "english",
       indicators: [],
-      recommended_action: "No action required.",
+      recommended_action: "No immediate threat detected. Standard vigilance advised.",
     };
 
     vi.spyOn(apiService, "analyzeContent").mockResolvedValue(mockApiResponse);
@@ -30,12 +30,18 @@ describe("ScannerPage Integration", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Safe Content")).toBeInTheDocument();
-      expect(screen.getByText("No action required.")).toBeInTheDocument();
+      expect(screen.getByText("No immediate threat detected. Standard vigilance advised.")).toBeInTheDocument();
     });
+
+    // Test resetting
+    const resetBtn = screen.getByRole("button", { name: /Scan Another Message/i });
+    fireEvent.click(resetBtn);
+
+    expect(screen.queryByText("Safe Content")).not.toBeInTheDocument();
   });
 
   it("handles analysis failure and displays error with retry button", async () => {
-    vi.spyOn(apiService, "analyzeContent").mockRejectedValue(new Error("Network connection error"));
+    const mockAnalyze = vi.spyOn(apiService, "analyzeContent").mockRejectedValue(new Error("Network connection error"));
 
     render(<ScannerPage />);
 
@@ -50,5 +56,31 @@ describe("ScannerPage Integration", () => {
       expect(screen.getByText("Network connection error")).toBeInTheDocument();
       expect(screen.getByRole("button", { name: /Try Again/i })).toBeInTheDocument();
     });
+
+    // Test Retry
+    mockAnalyze.mockResolvedValueOnce({
+      classification: "Suspicious",
+      risk_score: 0.60,
+      language_detected: "kannada",
+      indicators: ["Suspicious linguistic patterns detected in message"],
+      recommended_action: "Exercise caution. Do not click links or share credentials.",
+    });
+
+    const retryBtn = screen.getByRole("button", { name: /Try Again/i });
+    fireEvent.click(retryBtn);
+
+    await waitFor(() => {
+      expect(screen.getByText("Suspicious Content")).toBeInTheDocument();
+    });
+  });
+
+  it("populates sample prompt when sample chip is clicked", () => {
+    render(<ScannerPage />);
+
+    const kannadaChip = screen.getByRole("button", { name: /Kannada Phishing/i });
+    fireEvent.click(kannadaChip);
+
+    const textarea = screen.getByPlaceholderText(/Paste suspicious SMS/i);
+    expect(textarea.value).toContain("ಪ್ರಿಯ ಗ್ರಾಹಕರೇ");
   });
 });
