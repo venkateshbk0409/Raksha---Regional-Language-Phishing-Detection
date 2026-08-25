@@ -193,22 +193,22 @@ The repository structure will evolve as implementation progresses.
 
 | Member | Role | GitHub |
 |---|---|---|
-| **Venkatesh B Kulkarni** | Team Lead / Full-Stack & Integration | [@venkateshbk0409](https://github.com/venkateshbk0409) |
-| **Prajwal Angadi** | ML / NLP & Backend | [@prajwal-an](https://github.com/prajwal-an) |
+| **Venkatesh B Kulkarni** | Full-Stack & Integration | [@venkateshbk0409](https://github.com/venkateshbk0409) |
+| **Prajwal Angadi** | ML & Backend | [@prajwalangadi97-crypto](https://github.com/prajwalangadi97-crypto) |
 
 ### Team Contributions
 
 **Venkatesh B Kulkarni**
-- System architecture and project coordination
-- Frontend development
-- Backend integration
-- GitHub and deployment workflow
+- Project coordination and repository foundation setup
+- Dataset curation, text preprocessing and language detection.
+- Baseline machine learning model training
+- Frontend development and backend integration
 
 **Prajwal Angadi**
-- NLP and machine-learning pipeline
-- Dataset preparation
-- Model experimentation and evaluation
-- Backend detection logic
+- Local URL lexical parsing, backend logic and API endpoint wiring
+- Advanced transformer model evaluation and integration
+- Explainability UI refining and visualization
+- MongoDB database telemetry tracking integration
 
 Responsibilities may evolve during implementation based on project requirements.
 
