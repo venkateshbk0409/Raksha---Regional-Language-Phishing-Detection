@@ -19,7 +19,7 @@ Current Phase
 
 Phase: Phase 2 — Dataset Curation & Preprocessing
 
-Current Focus: Ready for TSK-03: Implement Text Preprocessor (Lang Detect)
+Current Focus: Ready for TSK-04: Train TF-IDF Baseline
 
 Last Updated: 2026-08-25
 
@@ -27,7 +27,7 @@ Task Status
 Task ID	Description	Owner	Status	Notes
 TSK-01	Setup FE/BE repositories & basic API contract	Venkatesh	COMPLETED	Scaffolded FastAPI backend and React + Vite frontend with Tailwind design system, strict API schema contracts, rate limiting, and test suites.
 TSK-02	Curate initial dataset & create augments	Prajwal	COMPLETED	Curated 36 message groups (144 samples) with Kannada translations, transliterations, and code-mixing. Group-split (70/15/15) with verified 0% leakage and specialized test subsets.
-TSK-03	Implement Text Preprocessor (Lang Detect)	Prajwal	NOT STARTED	
+TSK-03	Implement Text Preprocessor (Lang Detect)	Prajwal	COMPLETED	Implemented TextPreprocessor with Unicode NFC normalization, script analysis, deterministic language detection (kannada, english, code-mixed, unknown), tokenization, URL preservation, and contextual Kanglish transliteration preserving English keywords.
 TSK-04	Train TF-IDF Baseline	Prajwal	NOT STARTED	
 TSK-05	Implement Local URL Lexical Parser	Venkatesh	NOT STARTED	
 TSK-06	Build Risk Engine & Wire API Endpoints	Both	NOT STARTED	
@@ -50,9 +50,16 @@ Completed Work
   * Group-based Splitting: Enforced strict group-based splitting (Train: 100 samples / 69.4%, Validation: 20 samples / 13.9%, Held-out Test: 24 samples / 16.7%) guaranteeing 0% group leakage across splits.
   * Specialized Test Subsets: Exported 4 evaluation subsets (`test_native_kannada.csv`, `test_transliterated_kannada.csv`, `test_codemixed.csv`, `test_english.csv`) under `models/data/processed/subsets/`.
 
+* **TSK-03 (Implement Text Preprocessor / Language Detection)**:
+  * Preprocessor: Built `models/src/preprocessor.py` providing `TextPreprocessor` and `PreprocessedText` data model.
+  * Script Analysis: Implemented Unicode range checks (`\u0C80-\u0CFF` vs `[a-zA-Z]`) to determine native Kannada, Latin, and mixed script ratios.
+  * Language Detection: Deterministic classification into `kannada`, `english`, `code-mixed`, and `unknown` matching `api-specification.md`.
+  * Contextual Transliteration: Implemented high-confidence Kanglish standardization (`nimma` -> `ನಿಮ್ಮ`, `madi` -> `ಮಾಡಿ`, `koodale` -> `ಕೂಡಲೇ`) while strictly preserving English keywords (`account`, `bank`, `update`, `password`, `login`, `urgent`, `link`).
+  * Sanitization & URL Handling: NFC Unicode normalization, non-printable control character removal, whitespace normalization, and safe URL extraction preserving tokens.
+
 Current Work
 
-No implementation task is currently in progress. TSK-02 is complete and verified.
+No implementation task is currently in progress. TSK-03 is complete and verified.
 
 Blocked Work
 
@@ -76,12 +83,23 @@ Frontend
 * Production build: Passed (`npm run build` generated production bundle cleanly in 11.04s).
 
 ML
-* Dataset preparation: Passed (5/5 tests passed via `pytest models/tests`).
+* Dataset preparation: Passed (5/5 tests passed via `pytest models/tests/test_dataset.py`).
   * `test_dataset_files_exist` -> All raw, processed, summary, and subset CSVs exist.
   * `test_zero_group_leakage` -> Verified 0% group overlap across Train, Validation, and Test splits.
   * `test_split_proportions` -> Verified ~70% Train, ~15% Val, ~15% Test proportions.
   * `test_data_schema_and_integrity` -> Verified non-null values, $1 \le \text{length} \le 2000$, valid binary labels.
   * `test_specialized_evaluation_subsets` -> Verified 4 non-empty regional subsets with correct script/language metadata.
+* Preprocessor & Language Detection: Passed (10/10 tests passed via `pytest models/tests/test_preprocessor.py`).
+  * `test_language_detection_native_kannada` -> Verified 'kannada' detection.
+  * `test_language_detection_english` -> Verified 'english' detection.
+  * `test_language_detection_transliterated_kannada` -> Verified 'kannada'/'code-mixed' Latin-script detection.
+  * `test_language_detection_code_mixed` -> Verified 'code-mixed' detection.
+  * `test_empty_and_whitespace_input` -> Graceful handling of empty/whitespace.
+  * `test_numeric_and_symbolic_input` -> Numbers/symbols map to 'unknown'.
+  * `test_unicode_sanitization` -> NFC normalization and control character stripping.
+  * `test_english_token_preservation_in_transliteration` -> Preserved English keywords and transliterated Kanglish roots.
+  * `test_url_extraction` -> Accurate URL pattern extraction.
+  * `test_deterministic_preprocessing` -> Exact reproducible output across runs.
 * TF-IDF baseline: Not started
 * Transformer evaluation: Not started
 * Validation calibration: Not started
@@ -118,16 +136,16 @@ Handoff Notes
 Before stopping work, the agent should leave enough information for another contributor to continue safely.
 
 Current Handoff:
-* **What was completed**: TSK-01 (Setup FE/BE repositories & basic API contract) and TSK-02 (Curate initial dataset & create augments).
-* **What remains**: TSK-03 through TSK-10.
+* **What was completed**: TSK-01 (Setup FE/BE repositories & basic API contract), TSK-02 (Curate initial dataset & create augments), and TSK-03 (Implement Text Preprocessor / Language Detection).
+* **What remains**: TSK-04 through TSK-10.
 * **Known issues**: None.
-* **Tests that were run**: `python -m pytest models/tests -v` (5 passed), `python -m pytest backend/tests -v` (7 passed), `npm run test` (7 passed in 3 suites).
+* **Tests that were run**: `python -m pytest models/tests -v` (15 passed), `python -m pytest backend/tests -v` (7 passed), `npm run test` (7 passed in 3 suites).
 * **Blockers**: None.
-* **Recommended next task**: TSK-03 (Implement Text Preprocessor (Lang Detect)).
+* **Recommended next task**: TSK-04 (Train TF-IDF Baseline).
 
 Change History
 Date	Task	Change	Result
 2026-08-25	Initial setup	Created implementation status tracker	NOT STARTED
 2026-08-25	TSK-01	Setup FE/BE repositories & basic API contract	COMPLETED
 2026-08-25	TSK-02	Curate initial dataset & create augments	COMPLETED
-
+2026-08-25	TSK-03	Implement Text Preprocessor (Lang Detect)	COMPLETED
