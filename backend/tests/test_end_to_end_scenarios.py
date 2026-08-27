@@ -118,3 +118,110 @@ def test_scenario_oversized_2001_rejected():
     assert response.status_code == 400
     data = response.json()
     assert data["error_type"] == "validation_error"
+
+
+# ==============================================================================
+# BENCHMARK VERIFICATION SUITE (10 Real-World Diagnostic Cases)
+# ==============================================================================
+
+def test_benchmark_case_1_fake_bank_kyc():
+    """Test 1: Fake bank KYC with .xyz link -> Phishing (>= 0.75)."""
+    text = "Your SBI account will be blocked today due to incomplete KYC verification. Update your details immediately at http://sbi-verify-account.xyz/kyc to avoid suspension."
+    response = client.post("/api/v1/analyze", json={"content": text})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["classification"] == "Phishing"
+    assert data["risk_score"] >= 0.75
+
+
+def test_benchmark_case_2_fake_courier():
+    """Test 2: Fake courier parcel payment -> Phishing (>= 0.75)."""
+    text = "Your parcel could not be delivered. Pay ₹25 for the pending delivery charge and confirm your address here: http://delivery-confirm.xyz/pay"
+    response = client.post("/api/v1/analyze", json={"content": text})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["classification"] == "Phishing"
+    assert data["risk_score"] >= 0.75
+
+
+def test_benchmark_case_3_fake_electricity_bill():
+    """Test 3: Fake electricity bill cutoff threat -> Phishing (>= 0.75)."""
+    text = "BESCOM: Your electricity connection will be disconnected within 2 hours due to an unpaid bill. Pay immediately: http://bescom-payment.xyz"
+    response = client.post("/api/v1/analyze", json={"content": text})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["classification"] == "Phishing"
+    assert data["risk_score"] >= 0.75
+
+
+def test_benchmark_case_4_kannada_phishing():
+    """Test 4: Native Kannada bank KYC block scam -> Phishing (>= 0.75)."""
+    text = "ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆ KYC ಅಪ್ಡೇಟ್ ಆಗಿಲ್ಲ. ಖಾತೆ ಬಂದ್ ಆಗುವುದನ್ನು ತಪ್ಪಿಸಲು ತಕ್ಷಣ ಈ ಲಿಂಕ್ ಕ್ಲಿಕ್ ಮಾಡಿ: http://bank-kyc.xyz"
+    response = client.post("/api/v1/analyze", json={"content": text})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["classification"] == "Phishing"
+    assert data["risk_score"] >= 0.75
+    assert data["language_detected"] == "kannada"
+
+
+def test_benchmark_case_5_kanglish_phishing():
+    """Test 5: Kanglish power cut threat -> Phishing (>= 0.75)."""
+    text = "Nimma current bill pending ide. Ivattu payment madilla andre current disconnect agutte. Iga ee link open madi: http://payment-verify.xyz"
+    response = client.post("/api/v1/analyze", json={"content": text})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["classification"] == "Phishing"
+    assert data["risk_score"] >= 0.75
+    assert data["language_detected"] in ["kannada", "code-mixed"]
+
+
+def test_benchmark_case_6_suspicious_without_url():
+    """Test 6: Suspicious message without URL -> Suspicious (0.40 - 0.74)."""
+    text = "Your account requires immediate verification. Please contact the support team today to prevent interruption of service."
+    response = client.post("/api/v1/analyze", json={"content": text})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["classification"] == "Suspicious"
+    assert 0.40 <= data["risk_score"] < 0.75
+
+
+def test_benchmark_case_7_reward_shortened_link():
+    """Test 7: Reward claim with shortened bit.ly link -> Suspicious or Phishing."""
+    text = "Your reward is ready! Confirm your details to receive the amount: bit.ly/claim-reward"
+    response = client.post("/api/v1/analyze", json={"content": text})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["classification"] in ["Suspicious", "Phishing"]
+    assert data["risk_score"] >= 0.40
+    assert any("shortening" in ind.lower() for ind in data["indicators"])
+
+
+def test_benchmark_case_8_legit_electricity_reminder():
+    """Test 8: Legitimate electricity overdue reminder -> Safe or Suspicious (< 0.75)."""
+    text = "Your electricity bill is overdue. Please complete the payment today to avoid late fees."
+    response = client.post("/api/v1/analyze", json={"content": text})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["classification"] in ["Safe", "Suspicious"]
+    assert data["risk_score"] < 0.75
+
+
+def test_benchmark_case_9_normal_bank_notification():
+    """Test 9: Normal bank credit alert with official number advice -> Safe (< 0.40)."""
+    text = "Your account ending in 4821 was credited with ₹5,000 on 27 Aug 2026. If you did not make this transaction, contact your bank using the official number."
+    response = client.post("/api/v1/analyze", json={"content": text})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["classification"] == "Safe"
+    assert data["risk_score"] < 0.40
+
+
+def test_benchmark_case_10_normal_delivery_notification():
+    """Test 10: Normal shopping delivery notification -> Safe (< 0.40)."""
+    text = "Your order has been shipped and is expected to arrive tomorrow. You can check the delivery status in the official shopping app."
+    response = client.post("/api/v1/analyze", json={"content": text})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["classification"] == "Safe"
+    assert data["risk_score"] < 0.40

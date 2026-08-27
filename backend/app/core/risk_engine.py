@@ -92,11 +92,20 @@ class RiskEngine:
         # Modifiers
         modifier = 0.0
 
-        # Composite threat modifier: Both NLP and URL exhibit substantial risk
-        if has_url and url_s >= 0.60 and nlp_s >= 0.60:
-            modifier += 0.15
-        elif has_url and url_s >= 0.70 and nlp_s >= 0.40:
-            modifier += 0.10
+        # Composite multi-signal threat synergy:
+        # When both independent evidence vectors (suspicious message intent + suspicious URL delivery vector)
+        # are present, compound the threat score rather than diluting it through a simple arithmetic average.
+        if has_url:
+            if nlp_s >= 0.45 and url_s >= 0.35:
+                modifier += 0.25
+            elif nlp_s >= 0.40 and url_s >= 0.45:
+                modifier += 0.25
+            elif nlp_s >= 0.60 and url_s >= 0.20:
+                modifier += 0.15
+            elif url_s >= 0.60 and nlp_s >= 0.30:
+                modifier += 0.15
+            elif url_s >= 0.70:
+                modifier += 0.10
 
         total_risk = raw_risk + modifier
 

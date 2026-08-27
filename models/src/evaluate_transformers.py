@@ -77,6 +77,10 @@ class TransformerFeatureClassifier:
     def _init_transformer(self) -> None:
         """Initializes tokenizer and model if available."""
         if self._tokenizer is None:
+            if not self.model_name or "mock" in self.model_name.lower():
+                self._tokenizer = None
+                self._model = None
+                return
             try:
                 from transformers import AutoModel, AutoTokenizer
                 self._tokenizer = AutoTokenizer.from_pretrained(self.model_name)

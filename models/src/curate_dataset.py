@@ -416,6 +416,94 @@ def get_base_message_templates() -> List[Dict]:
             "transliterated": "Bangalore ge safe aagi thalupidira? Free aadaga nange call maadi.",
             "codemixed": "Bangalore reach aagidira safely? Free aagi call madi mathadana.",
         },
+
+        # ==========================================
+        # ADDITIONAL PHISHING: Delivery, Utility & Reward Vectors (36-38)
+        # ==========================================
+        {
+            "group_id": "PHISH_DELIV_02",
+            "category": "delivery_scam",
+            "label": 1,
+            "has_url": True,
+            "english": "Your parcel could not be delivered. Pay Rs 25 for the pending delivery charge and confirm your address here: http://delivery-confirm.xyz/pay",
+            "native_kannada": "ನಿಮ್ಮ ಪಾರ್ಸಲ್ ತಲುಪಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ. ಬಾಕಿ ಇರುವ ವಿತರಣಾ ಶುಲ್ಕ ರೂ 25 ಪಾವತಿಸಿ ಮತ್ತು ನಿಮ್ಮ ವಿಳಾಸವನ್ನು ಇಲ್ಲಿ ದೃಢೀಕರಿಸಿ: http://delivery-confirm.xyz/pay",
+            "transliterated": "Nimma parcel delivery agilla. Baki delivery charge Rs 25 pay madi matthu address confirm madi: http://delivery-confirm.xyz/pay",
+            "codemixed": "Your parcel could not be delivered. Pending charge Rs 25 pay madi address confirm madi: http://delivery-confirm.xyz/pay",
+        },
+        {
+            "group_id": "PHISH_UTIL_06",
+            "category": "utility_bill_threat",
+            "label": 1,
+            "has_url": True,
+            "english": "BESCOM: Your electricity connection will be disconnected within 2 hours due to an unpaid bill. Pay immediately: http://bescom-payment.xyz",
+            "native_kannada": "ಬೆಸ್ಕಾಂ: ಪಾವತಿಸದ ಬಿಲ್ ಕಾರಣದಿಂದ ನಿಮ್ಮ ವಿದ್ಯುತ್ ಸಂಪರ್ಕವು 2 ಗಂಟೆಗಳಲ್ಲಿ ಕಡಿತಗೊಳ್ಳಲಿದೆ. ತಕ್ಷಣ ಪಾವತಿಸಿ: http://bescom-payment.xyz",
+            "transliterated": "BESCOM: Unpaid bill karana nimma power connection 2 ghanteyalli disconnect agutte. Koodale pay madi: http://bescom-payment.xyz",
+            "codemixed": "BESCOM Alert: Electricity line 2 hours alli cut agatte bill pending ide. Urgent pay madi: http://bescom-payment.xyz",
+        },
+        {
+            "group_id": "PHISH_REW_06",
+            "category": "fake_reward_lottery",
+            "label": 1,
+            "has_url": True,
+            "english": "Your reward is ready! Confirm your details to receive the amount: bit.ly/claim-reward",
+            "native_kannada": "ನಿಮ್ಮ ಬಹುಮಾನ ಸಿದ್ಧವಾಗಿದೆ! ಹಣವನ್ನು ಸ್ವೀಕರಿಸಲು ನಿಮ್ಮ ವಿವರಗಳನ್ನು ದೃಢೀಕರಿಸಿ: bit.ly/claim-reward",
+            "transliterated": "Nimma reward ready ide! Hana receive madoke details confirm madi: bit.ly/claim-reward",
+            "codemixed": "Your reward is ready! Cash amount receive madkoloke details confirm madi: bit.ly/claim-reward",
+        },
+
+        # ==========================================
+        # BALANCED HARD NEGATIVES: Banking, Service Reminders & Advisories (39-43)
+        # ==========================================
+        {
+            "group_id": "LEGIT_TXN_04",
+            "category": "legitimate_transaction",
+            "label": 0,
+            "has_url": False,
+            "english": "Your account ending in 4821 was credited with Rs 5,000 on 27 Aug 2026. If you did not make this transaction, contact your bank using the official number.",
+            "native_kannada": "ನಿಮ್ಮ ಖಾತೆ 4821 ಕ್ಕೆ 27-ಆಗಸ್ಟ್-2026 ರಂದು ರೂ 5,000 ಜಮೆಯಾಗಿದೆ. ಈ ವಹಿವಾಟು ನೀವು ಮಾಡಿರದಿದ್ದರೆ, ಅಧಿಕೃತ ಸಂಖ್ಯೆಯನ್ನು ಬಳಸಿ ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಿ.",
+            "transliterated": "Nimma account 4821 ge Rs 5,000 credit aagide. Ee transaction neevu madlilla andre official number ge call madi.",
+            "codemixed": "Your account ending 4821 was credited with Rs 5,000. If you did not do this, official number ge call madi.",
+        },
+        {
+            "group_id": "LEGIT_BILL_01",
+            "category": "legitimate_service",
+            "label": 0,
+            "has_url": False,
+            "english": "Your electricity bill is overdue. Please complete the payment today to avoid late fees.",
+            "native_kannada": "ನಿಮ್ಮ ವಿದ್ಯುತ್ ಬಿಲ್ ಬಾಕಿ ಇದೆ. ತಡವಾದ ಶುಲ್ಕವನ್ನು ತಪ್ಪಿಸಲು ದಯವಿಟ್ಟು ಇಂದೇ ಪಾವತಿಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.",
+            "transliterated": "Nimma electricity bill overdue aagide. Late fees thapisalu ivatte payment poornagolisi.",
+            "codemixed": "Electricity bill is overdue. Please complete the payment today to avoid late fees in official app.",
+        },
+        {
+            "group_id": "LEGIT_DELIV_01",
+            "category": "legitimate_service",
+            "label": 0,
+            "has_url": False,
+            "english": "Your order has been shipped and is expected to arrive tomorrow. You can check the delivery status in the official shopping app.",
+            "native_kannada": "ನಿಮ್ಮ ಆರ್ಡರ್ ರವಾನೆಯಾಗಿದೆ ಮತ್ತು ನಾಳೆ ತಲುಪುವ ನಿರೀಕ್ಷೆಯಿದೆ. ಅಧಿಕೃತ ಶಾಪಿಂಗ್ ಆಪ್‌ನಲ್ಲಿ ವಿತರಣಾ ಸ್ಥಿತಿಯನ್ನು ನೀವು ಪರಿಶೀಲಿಸಬಹುದು.",
+            "transliterated": "Nimma order ship aagide nale delivery aagatte. Official shopping app nalli status check madi.",
+            "codemixed": "Your order is shipped and arriving tomorrow. Official shopping app alli status check madikolli.",
+        },
+        {
+            "group_id": "LEGIT_KYC_01",
+            "category": "legitimate_service",
+            "label": 0,
+            "has_url": False,
+            "english": "Bank Alert: Bank never sends links to update KYC or asks for OTP over phone. Never click unknown links or share confidential details.",
+            "native_kannada": "ಬ್ಯಾಂಕ್ ಎಚ್ಚರಿಕೆ: ಬ್ಯಾಂಕ್ ಎಂದಿಗೂ KYC ನವೀಕರಿಸಲು ಲಿಂಕ್ ಕಳುಹಿಸುವುದಿಲ್ಲ ಅಥವಾ OTP ಕೇಳುವುದಿಲ್ಲ. ಅಪರಿಚಿತ ಲಿಂಕ್ ಕ್ಲಿಕ್ ಮಾಡಬೇಡಿ.",
+            "transliterated": "Bank Alert: Bank yavathoo KYC update link kalsalla athava OTP kelalla. Unknown link click madbedi.",
+            "codemixed": "Bank Security Alert: Bank never sends links for KYC. Unknown links click madbeda and OTP share madbedi.",
+        },
+        {
+            "group_id": "LEGIT_REW_01",
+            "category": "legitimate_service",
+            "label": 0,
+            "has_url": False,
+            "english": "Your credit card reward point balance is 450 points for card ending 3920. You can view points in your monthly account statement.",
+            "native_kannada": "ಕಾರ್ಡ್ 3920 ರ ನಿಮ್ಮ ರಿವಾರ್ಡ್ ಪಾಯಿಂಟ್ ಬ್ಯಾಲೆನ್ಸ್ 450 ಪಾಯಿಂಟ್‌ಗಳಾಗಿವೆ. ಮಾಸಿಕ ಖಾತೆ ವಿವರಣೆಯಲ್ಲಿ ನೀವು ಪರಿಶೀಲಿಸಬಹುದು.",
+            "transliterated": "Card 3920 ge nimma reward point balance 450 ide. Monthly statement nalli check madi.",
+            "codemixed": "Your reward points balance is 450 points. Monthly bank statement alli view madikolli.",
+        },
     ]
 
     return templates

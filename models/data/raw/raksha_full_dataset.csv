@@ -143,3 +143,35 @@ LEGIT_PERS_05,Did you reach Bangalore safely? Call me when you are free.,0,engli
 LEGIT_PERS_05,ಬೆಂಗಳೂರನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ತಲುಪಿದಿರಾ? ಬಿಡುವಾದಾಗ ನನಗೆ ಕರೆ ಮಾಡಿ.,0,kannada,kannada,legitimate_personal,False,native_kannada_translation
 LEGIT_PERS_05,Bangalore ge safe aagi thalupidira? Free aadaga nange call maadi.,0,kannada,latin,legitimate_personal,False,transliterated_kannada
 LEGIT_PERS_05,Bangalore reach aagidira safely? Free aagi call madi mathadana.,0,code-mixed,latin,legitimate_personal,False,code_mixed
+PHISH_DELIV_02,Your parcel could not be delivered. Pay Rs 25 for the pending delivery charge and confirm your address here: http://delivery-confirm.xyz/pay,1,english,latin,delivery_scam,True,original_english
+PHISH_DELIV_02,ನಿಮ್ಮ ಪಾರ್ಸಲ್ ತಲುಪಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ. ಬಾಕಿ ಇರುವ ವಿತರಣಾ ಶುಲ್ಕ ರೂ 25 ಪಾವತಿಸಿ ಮತ್ತು ನಿಮ್ಮ ವಿಳಾಸವನ್ನು ಇಲ್ಲಿ ದೃಢೀಕರಿಸಿ: http://delivery-confirm.xyz/pay,1,kannada,kannada,delivery_scam,True,native_kannada_translation
+PHISH_DELIV_02,Nimma parcel delivery agilla. Baki delivery charge Rs 25 pay madi matthu address confirm madi: http://delivery-confirm.xyz/pay,1,kannada,latin,delivery_scam,True,transliterated_kannada
+PHISH_DELIV_02,Your parcel could not be delivered. Pending charge Rs 25 pay madi address confirm madi: http://delivery-confirm.xyz/pay,1,code-mixed,latin,delivery_scam,True,code_mixed
+PHISH_UTIL_06,BESCOM: Your electricity connection will be disconnected within 2 hours due to an unpaid bill. Pay immediately: http://bescom-payment.xyz,1,english,latin,utility_bill_threat,True,original_english
+PHISH_UTIL_06,ಬೆಸ್ಕಾಂ: ಪಾವತಿಸದ ಬಿಲ್ ಕಾರಣದಿಂದ ನಿಮ್ಮ ವಿದ್ಯುತ್ ಸಂಪರ್ಕವು 2 ಗಂಟೆಗಳಲ್ಲಿ ಕಡಿತಗೊಳ್ಳಲಿದೆ. ತಕ್ಷಣ ಪಾವತಿಸಿ: http://bescom-payment.xyz,1,kannada,kannada,utility_bill_threat,True,native_kannada_translation
+PHISH_UTIL_06,BESCOM: Unpaid bill karana nimma power connection 2 ghanteyalli disconnect agutte. Koodale pay madi: http://bescom-payment.xyz,1,kannada,latin,utility_bill_threat,True,transliterated_kannada
+PHISH_UTIL_06,BESCOM Alert: Electricity line 2 hours alli cut agatte bill pending ide. Urgent pay madi: http://bescom-payment.xyz,1,code-mixed,latin,utility_bill_threat,True,code_mixed
+PHISH_REW_06,Your reward is ready! Confirm your details to receive the amount: bit.ly/claim-reward,1,english,latin,fake_reward_lottery,True,original_english
+PHISH_REW_06,ನಿಮ್ಮ ಬಹುಮಾನ ಸಿದ್ಧವಾಗಿದೆ! ಹಣವನ್ನು ಸ್ವೀಕರಿಸಲು ನಿಮ್ಮ ವಿವರಗಳನ್ನು ದೃಢೀಕರಿಸಿ: bit.ly/claim-reward,1,kannada,kannada,fake_reward_lottery,True,native_kannada_translation
+PHISH_REW_06,Nimma reward ready ide! Hana receive madoke details confirm madi: bit.ly/claim-reward,1,kannada,latin,fake_reward_lottery,True,transliterated_kannada
+PHISH_REW_06,Your reward is ready! Cash amount receive madkoloke details confirm madi: bit.ly/claim-reward,1,code-mixed,latin,fake_reward_lottery,True,code_mixed
+LEGIT_TXN_04,"Your account ending in 4821 was credited with Rs 5,000 on 27 Aug 2026. If you did not make this transaction, contact your bank using the official number.",0,english,latin,legitimate_transaction,False,original_english
+LEGIT_TXN_04,"ನಿಮ್ಮ ಖಾತೆ 4821 ಕ್ಕೆ 27-ಆಗಸ್ಟ್-2026 ರಂದು ರೂ 5,000 ಜಮೆಯಾಗಿದೆ. ಈ ವಹಿವಾಟು ನೀವು ಮಾಡಿರದಿದ್ದರೆ, ಅಧಿಕೃತ ಸಂಖ್ಯೆಯನ್ನು ಬಳಸಿ ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಿ.",0,kannada,kannada,legitimate_transaction,False,native_kannada_translation
+LEGIT_TXN_04,"Nimma account 4821 ge Rs 5,000 credit aagide. Ee transaction neevu madlilla andre official number ge call madi.",0,kannada,latin,legitimate_transaction,False,transliterated_kannada
+LEGIT_TXN_04,"Your account ending 4821 was credited with Rs 5,000. If you did not do this, official number ge call madi.",0,code-mixed,latin,legitimate_transaction,False,code_mixed
+LEGIT_BILL_01,Your electricity bill is overdue. Please complete the payment today to avoid late fees.,0,english,latin,legitimate_service,False,original_english
+LEGIT_BILL_01,ನಿಮ್ಮ ವಿದ್ಯುತ್ ಬಿಲ್ ಬಾಕಿ ಇದೆ. ತಡವಾದ ಶುಲ್ಕವನ್ನು ತಪ್ಪಿಸಲು ದಯವಿಟ್ಟು ಇಂದೇ ಪಾವತಿಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.,0,kannada,kannada,legitimate_service,False,native_kannada_translation
+LEGIT_BILL_01,Nimma electricity bill overdue aagide. Late fees thapisalu ivatte payment poornagolisi.,0,kannada,latin,legitimate_service,False,transliterated_kannada
+LEGIT_BILL_01,Electricity bill is overdue. Please complete the payment today to avoid late fees in official app.,0,code-mixed,latin,legitimate_service,False,code_mixed
+LEGIT_DELIV_01,Your order has been shipped and is expected to arrive tomorrow. You can check the delivery status in the official shopping app.,0,english,latin,legitimate_service,False,original_english
+LEGIT_DELIV_01,ನಿಮ್ಮ ಆರ್ಡರ್ ರವಾನೆಯಾಗಿದೆ ಮತ್ತು ನಾಳೆ ತಲುಪುವ ನಿರೀಕ್ಷೆಯಿದೆ. ಅಧಿಕೃತ ಶಾಪಿಂಗ್ ಆಪ್‌ನಲ್ಲಿ ವಿತರಣಾ ಸ್ಥಿತಿಯನ್ನು ನೀವು ಪರಿಶೀಲಿಸಬಹುದು.,0,kannada,kannada,legitimate_service,False,native_kannada_translation
+LEGIT_DELIV_01,Nimma order ship aagide nale delivery aagatte. Official shopping app nalli status check madi.,0,kannada,latin,legitimate_service,False,transliterated_kannada
+LEGIT_DELIV_01,Your order is shipped and arriving tomorrow. Official shopping app alli status check madikolli.,0,code-mixed,latin,legitimate_service,False,code_mixed
+LEGIT_KYC_01,Bank Alert: Bank never sends links to update KYC or asks for OTP over phone. Never click unknown links or share confidential details.,0,english,latin,legitimate_service,False,original_english
+LEGIT_KYC_01,ಬ್ಯಾಂಕ್ ಎಚ್ಚರಿಕೆ: ಬ್ಯಾಂಕ್ ಎಂದಿಗೂ KYC ನವೀಕರಿಸಲು ಲಿಂಕ್ ಕಳುಹಿಸುವುದಿಲ್ಲ ಅಥವಾ OTP ಕೇಳುವುದಿಲ್ಲ. ಅಪರಿಚಿತ ಲಿಂಕ್ ಕ್ಲಿಕ್ ಮಾಡಬೇಡಿ.,0,kannada,kannada,legitimate_service,False,native_kannada_translation
+LEGIT_KYC_01,Bank Alert: Bank yavathoo KYC update link kalsalla athava OTP kelalla. Unknown link click madbedi.,0,kannada,latin,legitimate_service,False,transliterated_kannada
+LEGIT_KYC_01,Bank Security Alert: Bank never sends links for KYC. Unknown links click madbeda and OTP share madbedi.,0,code-mixed,latin,legitimate_service,False,code_mixed
+LEGIT_REW_01,Your credit card reward point balance is 450 points for card ending 3920. You can view points in your monthly account statement.,0,english,latin,legitimate_service,False,original_english
+LEGIT_REW_01,ಕಾರ್ಡ್ 3920 ರ ನಿಮ್ಮ ರಿವಾರ್ಡ್ ಪಾಯಿಂಟ್ ಬ್ಯಾಲೆನ್ಸ್ 450 ಪಾಯಿಂಟ್‌ಗಳಾಗಿವೆ. ಮಾಸಿಕ ಖಾತೆ ವಿವರಣೆಯಲ್ಲಿ ನೀವು ಪರಿಶೀಲಿಸಬಹುದು.,0,kannada,kannada,legitimate_service,False,native_kannada_translation
+LEGIT_REW_01,Card 3920 ge nimma reward point balance 450 ide. Monthly statement nalli check madi.,0,kannada,latin,legitimate_service,False,transliterated_kannada
+LEGIT_REW_01,Your reward points balance is 450 points. Monthly bank statement alli view madikolli.,0,code-mixed,latin,legitimate_service,False,code_mixed

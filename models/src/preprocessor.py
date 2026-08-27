@@ -17,8 +17,11 @@ from typing import Dict, List, Optional, Set, Tuple
 # Kannada Unicode Block: U+0C80 to U+0CFF
 KANNADA_UNICODE_REGEX = re.compile(r"[\u0C80-\u0CFF]")
 LATIN_UNICODE_REGEX = re.compile(r"[a-zA-Z]")
-DIGIT_REGEX = re.compile(r"[0-9]")
-URL_PATTERN_REGEX = re.compile(r"https?://[^\s/$.?#].[^\s]*|www\.[^\s]+", re.IGNORECASE)
+URL_PATTERN_REGEX = re.compile(
+    r"(?:https?://|www\.)[^\s/$.?#].[^\s]*|"
+    r"(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(?:/[^\s]*)?",
+    re.IGNORECASE,
+)
 
 # Non-printable and zero-width artifacts (except intentional zero-width joiners in valid scripts)
 NON_PRINTABLE_REGEX = re.compile(r"[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]")

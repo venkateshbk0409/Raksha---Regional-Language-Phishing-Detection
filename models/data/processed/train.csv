@@ -15,6 +15,10 @@ PHISH_KYC_04,Bank of Baroda: Urgent KYC re-verification required for active acco
 PHISH_KYC_04,ಬ್ಯಾಂಕ್ ಆಫ್ ಬರೋಡಾ: ಸಕ್ರಿಯ ಖಾತೆಗಾಗಿ ತುರ್ತು KYC ಮರುಪರಿಶೀಲನೆ ಅಗತ್ಯವಿದೆ. ಕ್ಲಿಕ್ ಮಾಡಿ: http://bob-kyc-desk.org,1,kannada,kannada,kyc_fraud,True,native_kannada_translation
 PHISH_KYC_04,Bank of Baroda: Sakriya khathegagi thurthu KYC verification bekaagide. Click maadi: http://bob-kyc-desk.org,1,kannada,latin,kyc_fraud,True,transliterated_kannada
 PHISH_KYC_04,Bank of Baroda: Urgent KYC update madlilla andre account close agutte. Link click madi: http://bob-kyc-desk.org,1,code-mixed,latin,kyc_fraud,True,code_mixed
+PHISH_KYC_05,Axis Bank: Your mobile number verification is pending. Verify immediately to continue UPI services: http://axis-upi-verify.biz,1,english,latin,kyc_fraud,True,original_english
+PHISH_KYC_05,ಆಕ್ಸಿಸ್ ಬ್ಯಾಂಕ್: ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಪರಿಶೀಲನೆ ಬಾಕಿ ಇದೆ. UPI ಸೇವೆ ಮುಂದುವರಿಸಲು ತಕ್ಷಣ ಪರಿಶೀಲಿಸಿ: http://axis-upi-verify.biz,1,kannada,kannada,kyc_fraud,True,native_kannada_translation
+PHISH_KYC_05,Axis Bank: Nimma mobile number verification baki ide. UPI service continue madoke eegale verify madi: http://axis-upi-verify.biz,1,kannada,latin,kyc_fraud,True,transliterated_kannada
+PHISH_KYC_05,Axis Bank notice: Mobile number verify aagilla. UPI stop agutte eegale link open madi: http://axis-upi-verify.biz,1,code-mixed,latin,kyc_fraud,True,code_mixed
 PHISH_KYC_06,"ICICI Alert: Your credit card reward points worth Rs 8,450 will expire tonight. Convert to cash here: http://icici-points-redeem.com",1,english,latin,kyc_fraud,True,original_english
 PHISH_KYC_06,"ICICI ಎಚ್ಚರಿಕೆ: ನಿಮ್ಮ ರೂ 8,450 ಮೌಲ್ಯದ ಕ್ರೆಡಿಟ್ ಕಾರ್ಡ್ ರಿವಾರ್ಡ್ ಪಾಯಿಂಟ್‌ಗಳು ಇಂದು ರಾತ್ರಿ ಮುಕ್ತಾಯಗೊಳ್ಳುತ್ತವೆ. ನಗದಾಗಿ ಪರಿವರ್ತಿಸಿ: http://icici-points-redeem.com",1,kannada,kannada,kyc_fraud,True,native_kannada_translation
 PHISH_KYC_06,"ICICI Alert: Nimma Rs 8,450 reward points ivattu ratri expire agatte. Cash convert madi: http://icici-points-redeem.com",1,kannada,latin,kyc_fraud,True,transliterated_kannada
@@ -31,6 +35,10 @@ PHISH_REW_01,"Congratulations! You won Rs 50,000 cash prize in Karnataka State D
 PHISH_REW_01,"ಅಭಿನಂದನೆಗಳು! ಕರ್ನಾಟಕ ರಾಜ್ಯ ದೀಪಾವಳಿ ಲಕ್ಕಿ ಡ್ರಾದಲ್ಲಿ ನೀವು ರೂ 50,000 ನಗದು ಬಹುಮಾನ ಗೆದ್ದಿದ್ದೀರಿ. ನಿಮ್ಮ ಹಣ ಪಡೆಯಲು ಭೇಟಿ ನೀಡಿ: http://karnataka-lottery-claim.com",1,kannada,kannada,fake_reward_lottery,True,native_kannada_translation
 PHISH_REW_01,"Abhinandanegalu! Karnataka State Diwali Lucky Draw nalli neevu Rs 50,000 prize geddidiri. Eegale claim madi: http://karnataka-lottery-claim.com",1,kannada,latin,fake_reward_lottery,True,transliterated_kannada
 PHISH_REW_01,Congratulations! Nimge Karnataka lottery alli Rs 50000 cash prize bandide. Claim madbeka andre link open madi: http://karnataka-lottery-claim.com,1,code-mixed,latin,fake_reward_lottery,True,code_mixed
+PHISH_REW_02,"PM Kisan Yojana: Rs 6,000 installment is pending in your bank account. Verify bank details to deposit: http://pmkisan-yojana-credit.org",1,english,latin,fake_reward_lottery,True,original_english
+PHISH_REW_02,"ಪಿಎಂ ಕಿಸಾನ್ ಯೋಜನೆ: ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ರೂ 6,000 ಕಂತು ಜಮೆಯಾಗಲು ಬಾಕಿ ಇದೆ. ಹಣ ಪಡೆಯಲು ವಿವರ ನಮೂದಿಸಿ: http://pmkisan-yojana-credit.org",1,kannada,kannada,fake_reward_lottery,True,native_kannada_translation
+PHISH_REW_02,"PM Kisan Yojana: Nimma bank account ge Rs 6,000 hana jama aagalu bank details verify maadi: http://pmkisan-yojana-credit.org",1,kannada,latin,fake_reward_lottery,True,transliterated_kannada
+PHISH_REW_02,PM Kisan Yojana hana Rs 6000 release aagide. Nimma account number enter madi receive madikolli: http://pmkisan-yojana-credit.org,1,code-mixed,latin,fake_reward_lottery,True,code_mixed
 PHISH_REW_03,"Flipkart Rewards: You have unredeemed shopping gift card worth Rs 10,000 expiring today. Redeem here: http://flipkart-scratch-win.in",1,english,latin,fake_reward_lottery,True,original_english
 PHISH_REW_03,"ಫ್ಲಿಪ್‌ಕಾರ್ಟ್ ರಿವಾರ್ಡ್ಸ್: ನಿಮ್ಮ ರೂ 10,000 ಶಾಪಿಂಗ್ ಗಿಫ್ಟ್ ಕಾರ್ಡ್ ಇಂದು ಅವಧಿ ಮುಗಿಯಲಿದೆ. ತಕ್ಷಣ ರಿಡೀಮ್ ಮಾಡಿ: http://flipkart-scratch-win.in",1,kannada,kannada,fake_reward_lottery,True,native_kannada_translation
 PHISH_REW_03,"Flipkart Rewards: Nimma Rs 10,000 shopping gift card ivatte expire agatte. Redeem maadi: http://flipkart-scratch-win.in",1,kannada,latin,fake_reward_lottery,True,transliterated_kannada
@@ -51,10 +59,14 @@ PHISH_DELIV_01,India Post: Your package #IN849204 cannot be delivered due to mis
 PHISH_DELIV_01,ಇಂಡಿಯಾ ಪೋಸ್ಟ್: ವಿಳಾಸ ಅಪೂರ್ಣವಾಗಿರುವುದರಿಂದ ನಿಮ್ಮ ಪಾರ್ಸಲ್ #IN849204 ತಲುಪಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ. 12 ಗಂಟೆಗಳಲ್ಲಿ ವಿಳಾಸ ನವೀಕರಿಸಿ: http://indiapost-parcel-update.com,1,kannada,kannada,delivery_scam,True,native_kannada_translation
 PHISH_DELIV_01,India Post: Vilasa thappagiruvudarinda nimma parcel delivery aagilla. 12 ghanteyalli address update maadi: http://indiapost-parcel-update.com,1,kannada,latin,delivery_scam,True,transliterated_kannada
 PHISH_DELIV_01,India Post parcel deliver agilla address incomplete aagide. Update madoke link click madi: http://indiapost-parcel-update.com,1,code-mixed,latin,delivery_scam,True,code_mixed
-PHISH_TAX_01,"Income Tax Department: Tax refund of Rs 18,450 approved for your PAN. Verify bank account number to credit: http://incometax-refund-gov.in",1,english,latin,credential_harvesting,True,original_english
-PHISH_TAX_01,"ಆದಾಯ ತೆರಿಗೆ ಇಲಾಖೆ: ನಿಮ್ಮ ಪಾನ್‌ಗೆ ರೂ 18,450 ತೆರಿಗೆ ಮರುಪಾವತಿ ಅನುಮೋದಿಸಲಾಗಿದೆ. ಹಣ ಪಡೆಯಲು ಬ್ಯಾಂಕ್ ಖಾತೆ ಪರಿಶೀಲಿಸಿ: http://incometax-refund-gov.in",1,kannada,kannada,credential_harvesting,True,native_kannada_translation
-PHISH_TAX_01,"Income Tax Ilakhe: Nimma PAN ge Rs 18,450 tax refund approve aagide. Bank account verify maadi: http://incometax-refund-gov.in",1,kannada,latin,credential_harvesting,True,transliterated_kannada
-PHISH_TAX_01,Income Tax Department refund Rs 18450 release aagide. Nimma account ge credit agbekandre verify madi: http://incometax-refund-gov.in,1,code-mixed,latin,credential_harvesting,True,code_mixed
+LEGIT_OTP_01,"739281 is your OTP for SBI net banking login. Valid for 5 minutes. Never share this OTP with anyone, including bank staff.",0,english,latin,legitimate_otp,False,original_english
+LEGIT_OTP_01,739281 ನಿಮ್ಮ SBI ನೆಟ್ ಬ್ಯಾಂಕಿಂಗ್ ಲಾಗಿನ್ OTP ಆಗಿದೆ. 5 ನಿಮಿಷಗಳವರೆಗೆ ಮಾನ್ಯವಾಗಿರುತ್ತದೆ. ಬ್ಯಾಂಕ್ ಅಧಿಕಾರಿಗಳು ಸೇರಿದಂತೆ ಯಾರಿಗೂ OTP ಹಂಚಿಕೊಳ್ಳಬೇಡಿ.,0,kannada,kannada,legitimate_otp,False,native_kannada_translation
+LEGIT_OTP_01,739281 nimma SBI net banking login OTP. 5 nimisha valid ide. Yarigoo OTP share madbedi.,0,kannada,latin,legitimate_otp,False,transliterated_kannada
+LEGIT_OTP_01,739281 is your secret OTP for SBI login. 5 mins validity. Yarigoo share madbeda even bank officials.,0,code-mixed,latin,legitimate_otp,False,code_mixed
+LEGIT_OTP_02,"Your OTP for transaction of Rs 1,200 at Swiggy using HDFC Card ending 4091 is 849201. Do not share OTP for your security.",0,english,latin,legitimate_otp,False,original_english
+LEGIT_OTP_02,"ಸ್ವಿಗ್ಗಿಯಲ್ಲಿ ನಿಮ್ಮ HDFC ಕಾರ್ಡ್ 4091 ಬಳಸಿ ರೂ 1,200 ವಹಿವಾಟಿಗೆ OTP 849201 ಆಗಿದೆ. ಸುರಕ್ಷತೆಗಾಗಿ ಯಾರಿಗೂ ತಿಳಿಸಬೇಡಿ.",0,kannada,kannada,legitimate_otp,False,native_kannada_translation
+LEGIT_OTP_02,Swiggy alli HDFC card 4091 inda Rs 1200 payment ge OTP 849201 aagide. Yarigu share madbedi.,0,kannada,latin,legitimate_otp,False,transliterated_kannada
+LEGIT_OTP_02,"HDFC Card payment of Rs 1,200 at Swiggy ge OTP 849201. Do not share OTP with anyone.",0,code-mixed,latin,legitimate_otp,False,code_mixed
 LEGIT_OTP_03,392019 is your verification code to log in to Amazon. Never share your Amazon password or OTP with anyone.,0,english,latin,legitimate_otp,False,original_english
 LEGIT_OTP_03,392019 ಅಮೆಜಾನ್ ಲಾಗಿನ್ ಮಾಡಲು ನಿಮ್ಮ ಪರಿಶೀಲನಾ ಕೋಡ್ ಆಗಿದೆ. ನಿಮ್ಮ ಅಮೆಜಾನ್ ಪಾಸ್‌ವರ್ಡ್ ಅಥವಾ OTP ಯಾರಿಗೂ ಹಂಚಿಕೊಳ್ಳಬೇಡಿ.,0,kannada,kannada,legitimate_otp,False,native_kannada_translation
 LEGIT_OTP_03,392019 Amazon login madalu verification code. Nimma password athava OTP yarigu kodbedi.,0,kannada,latin,legitimate_otp,False,transliterated_kannada
@@ -63,6 +75,10 @@ LEGIT_TXN_01,"Dear customer, Rs 35,000 credited to your Canara Bank A/c ending 8
 LEGIT_TXN_01,"ಗ್ರಾಹಕರೇ, ನಿಮ್ಮ ಕೆನರಾ ಬ್ಯಾಂಕ್ ಖಾತೆ 8219 ಕ್ಕೆ 25-ಆಗಸ್ಟ್-2026 ರಂದು ವೇತನವಾಗಿ ರೂ 35,000 ಜಮೆಯಾಗಿದೆ. ಲಭ್ಯವಿರುವ ಒಟ್ಟು ಬ್ಯಾಲೆನ್ಸ್: ರೂ 42,150.",0,kannada,kannada,legitimate_transaction,False,native_kannada_translation
 LEGIT_TXN_01,"Grahakare, nimma Canara Bank khate 8219 ge salary Rs 35,000 credit aagide. Total Balance: Rs 42,150.",0,kannada,latin,legitimate_transaction,False,transliterated_kannada
 LEGIT_TXN_01,"Dear customer, Rs 35000 salary credit aytu nimma Canara Bank account ge. Available balance Rs 42,150.",0,code-mixed,latin,legitimate_transaction,False,code_mixed
+LEGIT_TXN_02,UPI Alert: Rs 250 paid successfully to Nandini Milk Parlour from GPay UPI Ref 92839104819. Clear balance in your account.,0,english,latin,legitimate_transaction,False,original_english
+LEGIT_TXN_02,UPI ಎಚ್ಚರಿಕೆ: ನಂದಿನಿ ಮಿಲ್ಕ್ ಪಾರ್ಲರ್‌ಗೆ ರೂ 250 ಯಶಸ್ವಿಯಾಗಿ ಪಾವತಿಸಲಾಗಿದೆ. UPI ರೆಫರೆನ್ಸ್ 92839104819.,0,kannada,kannada,legitimate_transaction,False,native_kannada_translation
+LEGIT_TXN_02,UPI Alert: Nandini Milk Parlour ge Rs 250 successfully pay aagide. UPI Ref 92839104819.,0,kannada,latin,legitimate_transaction,False,transliterated_kannada
+LEGIT_TXN_02,Rs 250 paid to Nandini Milk Parlour via UPI. Transaction successful aagide. Ref: 92839104819.,0,code-mixed,latin,legitimate_transaction,False,code_mixed
 LEGIT_TXN_03,"SBI Alert: Rs 2,000 withdrawn from ATM at MG Road Bengaluru from A/c ending 1920. Avail Bal: Rs 15,400.",0,english,latin,legitimate_transaction,False,original_english
 LEGIT_TXN_03,"SBI ಎಚ್ಚರಿಕೆ: ಖಾತೆ 1920 ರಿಂದ ಬೆಂಗಳೂರಿನ ಎಂಜಿ ರಸ್ತೆಯ ಎಟಿಎಂನಲ್ಲಿ ರೂ 2,000 ಹಿಂಪಡೆಯಲಾಗಿದೆ. ಲಭ್ಯವಿರುವ ಬ್ಯಾಲೆನ್ಸ್: ರೂ 15,400.",0,kannada,kannada,legitimate_transaction,False,native_kannada_translation
 LEGIT_TXN_03,"SBI Alert: Khate 1920 inda Bengaluru MG Road ATM nalli Rs 2,000 withdraw madalagide. Balance: Rs 15,400.",0,kannada,latin,legitimate_transaction,False,transliterated_kannada
@@ -79,10 +95,6 @@ LEGIT_SERV_03,Airtel: Your unlimited prepaid pack of Rs 299 is successfully rech
 LEGIT_SERV_03,ಏರ್‌ಟೆಲ್: ನಿಮ್ಮ ರೂ 299 ರ ಪ್ರಿಪೇಯ್ಡ್ ಪ್ಯಾಕ್ ಯಶಸ್ವಿಯಾಗಿ ರೀಚಾರ್ಜ್ ಆಗಿದೆ. 28 ದಿನಗಳವರೆಗೆ 1.5GB/ದಿನ ಡೇಟಾ ಮಾನ್ಯವಾಗಿರುತ್ತದೆ.,0,kannada,kannada,legitimate_service,False,native_kannada_translation
 LEGIT_SERV_03,Airtel: Nimma Rs 299 recharge successfully aagide. 28 dina 1.5GB daily data sigatte.,0,kannada,latin,legitimate_service,False,transliterated_kannada
 LEGIT_SERV_03,Airtel Rs 299 pack successfully recharge aaythu. 28 days validity with 1.5GB/day data.,0,code-mixed,latin,legitimate_service,False,code_mixed
-LEGIT_SERV_04,KSRTC Booking: Your ticket from Bengaluru to Mangaluru on 28-Aug-2026 is confirmed. PNR: KSRTC892018. Seat 14.,0,english,latin,legitimate_service,False,original_english
-LEGIT_SERV_04,KSRTC ಬುಕಿಂಗ್: 28-ಆಗಸ್ಟ್-2026 ರಂದು ಬೆಂಗಳೂರಿನಿಂದ ಮಂಗಳೂರಿಗೆ ನಿಮ್ಮ ಟಿಕೆಟ್ ದೃಢೀಕರಿಸಲಾಗಿದೆ. PNR: KSRTC892018. ಸೀಟ್ ಸಂಖ್ಯೆ 14.,0,kannada,kannada,legitimate_service,False,native_kannada_translation
-LEGIT_SERV_04,KSRTC Booking: Bengaluru inda Mangalurige nimma ticket confirm aagide. PNR: KSRTC892018. Seat 14.,0,kannada,latin,legitimate_service,False,transliterated_kannada
-LEGIT_SERV_04,KSRTC bus ticket Bengaluru to Mangalore confirm aytu. PNR: KSRTC892018. Have a safe journey.,0,code-mixed,latin,legitimate_service,False,code_mixed
 LEGIT_SERV_05,Apollo Pharmacy: Your medicine order #AP9201 is packed and ready for delivery. Total amount Rs 450.,0,english,latin,legitimate_service,False,original_english
 LEGIT_SERV_05,ಅಪೊಲೊ ಫಾರ್ಮಸಿ: ನಿಮ್ಮ ಔಷಧಿ ಆರ್ಡರ್ #AP9201 ಪ್ಯಾಕ್ ಮಾಡಲಾಗಿದೆ ಮತ್ತು ವಿತರಣೆಗೆ ಸಿದ್ಧವಾಗಿದೆ. ಒಟ್ಟು ಮೊತ್ತ ರೂ 450.,0,kannada,kannada,legitimate_service,False,native_kannada_translation
 LEGIT_SERV_05,Apollo Pharmacy: Nimma medicine order #AP9201 pack aagide. Delivery ready ide. Amount Rs 450.,0,kannada,latin,legitimate_service,False,transliterated_kannada
@@ -95,7 +107,19 @@ LEGIT_PERS_03,"Happy Ugadi to you and your family! May this new year bring happi
 LEGIT_PERS_03,ನಿಮಗೂ ಮತ್ತು ನಿಮ್ಮ ಕುಟುಂಬಕ್ಕೂ ಯುಗಾದಿ ಹಬ್ಬದ ಹಾರ್ದಿಕ ಶುಭಾಶಯಗಳು! ಈ ಹೊಸ ವರ್ಷವು ಸಂತೋಷ ಮತ್ತು ಸಮೃದ್ಧಿಯನ್ನು ತರಲಿ.,0,kannada,kannada,legitimate_personal,False,native_kannada_translation
 LEGIT_PERS_03,Nimagoo matthu nimma kutumbakkoo Yugadi habbada shubhashayagalu! Ee hosa varsha santhosha tharali.,0,kannada,latin,legitimate_personal,False,transliterated_kannada
 LEGIT_PERS_03,"Happy Ugadi to you and family! Habbada hardika shubhashayagalu, have a great year ahead.",0,code-mixed,latin,legitimate_personal,False,code_mixed
-LEGIT_PERS_05,Did you reach Bangalore safely? Call me when you are free.,0,english,latin,legitimate_personal,False,original_english
-LEGIT_PERS_05,ಬೆಂಗಳೂರನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ತಲುಪಿದಿರಾ? ಬಿಡುವಾದಾಗ ನನಗೆ ಕರೆ ಮಾಡಿ.,0,kannada,kannada,legitimate_personal,False,native_kannada_translation
-LEGIT_PERS_05,Bangalore ge safe aagi thalupidira? Free aadaga nange call maadi.,0,kannada,latin,legitimate_personal,False,transliterated_kannada
-LEGIT_PERS_05,Bangalore reach aagidira safely? Free aagi call madi mathadana.,0,code-mixed,latin,legitimate_personal,False,code_mixed
+PHISH_DELIV_02,Your parcel could not be delivered. Pay Rs 25 for the pending delivery charge and confirm your address here: http://delivery-confirm.xyz/pay,1,english,latin,delivery_scam,True,original_english
+PHISH_DELIV_02,ನಿಮ್ಮ ಪಾರ್ಸಲ್ ತಲುಪಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ. ಬಾಕಿ ಇರುವ ವಿತರಣಾ ಶುಲ್ಕ ರೂ 25 ಪಾವತಿಸಿ ಮತ್ತು ನಿಮ್ಮ ವಿಳಾಸವನ್ನು ಇಲ್ಲಿ ದೃಢೀಕರಿಸಿ: http://delivery-confirm.xyz/pay,1,kannada,kannada,delivery_scam,True,native_kannada_translation
+PHISH_DELIV_02,Nimma parcel delivery agilla. Baki delivery charge Rs 25 pay madi matthu address confirm madi: http://delivery-confirm.xyz/pay,1,kannada,latin,delivery_scam,True,transliterated_kannada
+PHISH_DELIV_02,Your parcel could not be delivered. Pending charge Rs 25 pay madi address confirm madi: http://delivery-confirm.xyz/pay,1,code-mixed,latin,delivery_scam,True,code_mixed
+LEGIT_BILL_01,Your electricity bill is overdue. Please complete the payment today to avoid late fees.,0,english,latin,legitimate_service,False,original_english
+LEGIT_BILL_01,ನಿಮ್ಮ ವಿದ್ಯುತ್ ಬಿಲ್ ಬಾಕಿ ಇದೆ. ತಡವಾದ ಶುಲ್ಕವನ್ನು ತಪ್ಪಿಸಲು ದಯವಿಟ್ಟು ಇಂದೇ ಪಾವತಿಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.,0,kannada,kannada,legitimate_service,False,native_kannada_translation
+LEGIT_BILL_01,Nimma electricity bill overdue aagide. Late fees thapisalu ivatte payment poornagolisi.,0,kannada,latin,legitimate_service,False,transliterated_kannada
+LEGIT_BILL_01,Electricity bill is overdue. Please complete the payment today to avoid late fees in official app.,0,code-mixed,latin,legitimate_service,False,code_mixed
+LEGIT_DELIV_01,Your order has been shipped and is expected to arrive tomorrow. You can check the delivery status in the official shopping app.,0,english,latin,legitimate_service,False,original_english
+LEGIT_DELIV_01,ನಿಮ್ಮ ಆರ್ಡರ್ ರವಾನೆಯಾಗಿದೆ ಮತ್ತು ನಾಳೆ ತಲುಪುವ ನಿರೀಕ್ಷೆಯಿದೆ. ಅಧಿಕೃತ ಶಾಪಿಂಗ್ ಆಪ್‌ನಲ್ಲಿ ವಿತರಣಾ ಸ್ಥಿತಿಯನ್ನು ನೀವು ಪರಿಶೀಲಿಸಬಹುದು.,0,kannada,kannada,legitimate_service,False,native_kannada_translation
+LEGIT_DELIV_01,Nimma order ship aagide nale delivery aagatte. Official shopping app nalli status check madi.,0,kannada,latin,legitimate_service,False,transliterated_kannada
+LEGIT_DELIV_01,Your order is shipped and arriving tomorrow. Official shopping app alli status check madikolli.,0,code-mixed,latin,legitimate_service,False,code_mixed
+LEGIT_KYC_01,Bank Alert: Bank never sends links to update KYC or asks for OTP over phone. Never click unknown links or share confidential details.,0,english,latin,legitimate_service,False,original_english
+LEGIT_KYC_01,ಬ್ಯಾಂಕ್ ಎಚ್ಚರಿಕೆ: ಬ್ಯಾಂಕ್ ಎಂದಿಗೂ KYC ನವೀಕರಿಸಲು ಲಿಂಕ್ ಕಳುಹಿಸುವುದಿಲ್ಲ ಅಥವಾ OTP ಕೇಳುವುದಿಲ್ಲ. ಅಪರಿಚಿತ ಲಿಂಕ್ ಕ್ಲಿಕ್ ಮಾಡಬೇಡಿ.,0,kannada,kannada,legitimate_service,False,native_kannada_translation
+LEGIT_KYC_01,Bank Alert: Bank yavathoo KYC update link kalsalla athava OTP kelalla. Unknown link click madbedi.,0,kannada,latin,legitimate_service,False,transliterated_kannada
+LEGIT_KYC_01,Bank Security Alert: Bank never sends links for KYC. Unknown links click madbeda and OTP share madbedi.,0,code-mixed,latin,legitimate_service,False,code_mixed

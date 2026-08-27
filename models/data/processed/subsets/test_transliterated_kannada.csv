@@ -2,6 +2,7 @@ group_id,text,label,language,script,category,has_url,variant_type
 PHISH_UTIL_01,BESCOM Alert: Hinde tingala bill pay madada karana ivattu ratri 9:30 ge power cut madtare. Officer ge call madi: 9845123456,1,kannada,latin,utility_bill_threat,False,transliterated_kannada
 PHISH_UTIL_05,BWSSB Water Notice: Baki hana pay madada karana nale belagge water connection cut madtare. Call madi: 9102938475,1,kannada,latin,utility_bill_threat,False,transliterated_kannada
 PHISH_REW_04,"Gruha Lakshmi Yojana: Nimma Aadhaar card ge Karnataka sarkar Rs 2,000 approve madide. Hana padayalu click madi: http://gruhalakshmi-gov-karnataka.org",1,kannada,latin,fake_reward_lottery,True,transliterated_kannada
-LEGIT_OTP_02,Swiggy alli HDFC card 4091 inda Rs 1200 payment ge OTP 849201 aagide. Yarigu share madbedi.,0,kannada,latin,legitimate_otp,False,transliterated_kannada
-LEGIT_TXN_02,UPI Alert: Nandini Milk Parlour ge Rs 250 successfully pay aagide. UPI Ref 92839104819.,0,kannada,latin,legitimate_transaction,False,transliterated_kannada
+PHISH_TAX_01,"Income Tax Ilakhe: Nimma PAN ge Rs 18,450 tax refund approve aagide. Bank account verify maadi: http://incometax-refund-gov.in",1,kannada,latin,credential_harvesting,True,transliterated_kannada
 LEGIT_PERS_01,"Namaskara Ramesh, ee weekend habbakke Mysurige bartheera? Train timing heli.",0,kannada,latin,legitimate_personal,False,transliterated_kannada
+LEGIT_TXN_04,"Nimma account 4821 ge Rs 5,000 credit aagide. Ee transaction neevu madlilla andre official number ge call madi.",0,kannada,latin,legitimate_transaction,False,transliterated_kannada
+LEGIT_REW_01,Card 3920 ge nimma reward point balance 450 ide. Monthly statement nalli check madi.,0,kannada,latin,legitimate_service,False,transliterated_kannada

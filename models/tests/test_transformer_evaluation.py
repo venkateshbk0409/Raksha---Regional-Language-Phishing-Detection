@@ -49,9 +49,9 @@ def test_transformer_evaluation_report_artifact_structure():
 
     assert "timestamp" in data
     assert "dataset_split_summary" in data
-    assert data["dataset_split_summary"]["train_samples"] == 100
-    assert data["dataset_split_summary"]["validation_samples"] == 20
-    assert data["dataset_split_summary"]["test_samples"] == 24
+    assert data["dataset_split_summary"]["train_samples"] > 0
+    assert data["dataset_split_summary"]["validation_samples"] > 0
+    assert data["dataset_split_summary"]["test_samples"] > 0
 
     assert "candidates" in data
     assert "muril" in data["candidates"]

@@ -168,3 +168,21 @@ def test_ssrf_safety_zero_network_calls(parser):
         # Assert no network calls were attempted
         mock_socket.assert_not_called()
         mock_urlopen.assert_not_called()
+
+
+def test_url_shortener_detection(parser):
+    """Verify common URL shortening domains are detected generically."""
+    for shortener_url in ["http://bit.ly/claim-reward", "https://tinyurl.com/xyz123", "http://t.co/abc"]:
+        res = parser.analyze(f"Claim now at {shortener_url}")
+        assert res.has_url is True
+        assert any("shortening service detected" in ind.lower() for ind in res.indicators)
+        assert res.features_list[0].is_shortened is True
+
+
+def test_schemeless_url_extraction(parser):
+    """Verify schemeless URLs like bit.ly/path or domain.com/path are extracted."""
+    res = parser.analyze("Your reward is ready: bit.ly/claim-reward")
+    assert res.has_url is True
+    assert res.url_count == 1
+    assert "bit.ly/claim-reward" in res.urls
+    assert any("shortening" in ind.lower() for ind in res.indicators)

@@ -16,10 +16,10 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 
-# Regex pattern to extract URLs from text
+# Regex pattern to extract URLs from text (supports http(s)://, www., standard domain paths, and shorteners)
 URL_EXTRACTION_REGEX = re.compile(
     r"(?:https?://|www\.)[^\s/$.?#].[^\s]*|"
-    r"[a-zA-Z0-9.-]+\.(?:com|org|net|in|co|info|biz|xyz|top|site|club|vip|online|live|shop|tech|app|io|me|cc|tk|ml|ga|cf|gq)/[^\s]*",
+    r"(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(?:/[^\s]*)?",
     re.IGNORECASE,
 )
 
@@ -31,13 +31,21 @@ SUSPICIOUS_TLDS: Set[str] = {
     "trade", "accountant", "download", "stream", "win", "bid",
 }
 
-# Suspicious keywords commonly found in phishing URLs
+# Common URL Shortener domains frequently used to obscure phishing landing pages
+SHORTENER_DOMAINS: Set[str] = {
+    "bit.ly", "tinyurl.com", "t.co", "cutt.ly", "is.gd", "rb.gy", "ow.ly",
+    "tiny.cc", "shorturl.at", "goo.gl", "v.gd", "qr.ae", "adf.ly", "bl.ink",
+}
+
+# Suspicious keywords commonly found in phishing URLs (coercive actions, financial, account, utility, delivery)
 SUSPICIOUS_URL_KEYWORDS: Set[str] = {
     "login", "signin", "verify", "verification", "kyc", "update", "secure",
     "security", "account", "banking", "netbanking", "password", "otp", "aadhaar",
     "pan", "sbi", "hdfc", "icici", "bescom", "hescom", "mescom", "cesc",
     "ebill", "electricity", "disconnection", "bill", "refund", "reward",
     "claim", "lottery", "gift", "bonus", "free", "apk", "telegram",
+    "pay", "payment", "confirm", "delivery", "courier", "parcel", "billpay",
+    "recharge", "track", "support", "service", "prize",
 }
 
 # Standard HTTP/HTTPS ports
@@ -57,6 +65,7 @@ class UrlLexicalFeatures:
     host_length: int
     is_ip: bool
     is_https: bool
+    is_shortened: bool
     subdomain_count: int
     hyphen_count: int
     has_at_symbol: bool
@@ -149,6 +158,7 @@ class LocalUrlLexicalParser:
                 host_length=0,
                 is_ip=False,
                 is_https=False,
+                is_shortened=False,
                 subdomain_count=0,
                 hyphen_count=0,
                 has_at_symbol=False,
@@ -162,7 +172,7 @@ class LocalUrlLexicalParser:
                 indicators=["Malformed link detected"],
             )
 
-        # Prepend scheme if missing (e.g. "www.example.com/path" -> "http://www.example.com/path")
+        # Prepend scheme if missing (e.g. "www.example.com/path" or "bit.ly/xyz" -> "http://bit.ly/xyz")
         url_to_parse = raw_url.strip()
         if not re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*://", url_to_parse):
             url_to_parse = "http://" + url_to_parse
@@ -181,6 +191,7 @@ class LocalUrlLexicalParser:
                 host_length=0,
                 is_ip=False,
                 is_https=False,
+                is_shortened=False,
                 subdomain_count=0,
                 hyphen_count=0,
                 has_at_symbol=False,
@@ -218,6 +229,7 @@ class LocalUrlLexicalParser:
                 host_length=len(hostname),
                 is_ip=False,
                 is_https=False,
+                is_shortened=False,
                 subdomain_count=0,
                 hyphen_count=0,
                 has_at_symbol=False,
@@ -247,19 +259,25 @@ class LocalUrlLexicalParser:
             score += 0.10
             indicators.append("Insecure connection (HTTP)")
 
-        # Rule 3: Presence of '@' symbol (+0.30)
+        # Rule 3: URL Shortener Domain (+0.25)
+        is_shortened = (hostname in SHORTENER_DOMAINS)
+        if is_shortened:
+            score += 0.25
+            indicators.append("URL shortening service detected (destination obscured)")
+
+        # Rule 4: Presence of '@' symbol (+0.30)
         has_at_symbol = "@" in raw_url
         if has_at_symbol:
             score += 0.30
             indicators.append("Misleading '@' symbol in URL")
 
-        # Rule 4: Homoglyphs / Punycode (+0.35)
+        # Rule 5: Homoglyphs / Punycode (+0.35)
         has_homoglyphs = self.check_homoglyphs(hostname)
         if has_homoglyphs:
             score += 0.35
             indicators.append("Punycode or homoglyph domain detected")
 
-        # Rule 5: Suspicious Top-Level Domain (+0.25)
+        # Rule 6: Suspicious Top-Level Domain (+0.25)
         has_suspicious_tld = False
         if "." in hostname and not is_ip:
             tld = hostname.split(".")[-1].lower()
@@ -268,7 +286,7 @@ class LocalUrlLexicalParser:
                 score += 0.25
                 indicators.append(f"Suspicious top-level domain (.{tld})")
 
-        # Rule 6: Excessive Subdomains (+0.20)
+        # Rule 7: Excessive Subdomains (+0.20)
         # e.g., login.sbi.co.in.attacker.com has 6 labels -> 4 subdomains
         host_parts = hostname.split(".")
         subdomain_count = max(0, len(host_parts) - 2)
@@ -276,26 +294,26 @@ class LocalUrlLexicalParser:
             score += 0.20
             indicators.append("Excessive subdomains in URL")
 
-        # Rule 7: Excessive Hyphens in hostname (+0.15)
+        # Rule 8: Excessive Hyphens in hostname (+0.15)
         hyphen_count = hostname.count("-")
         if hyphen_count >= 2:
             score += 0.15
             indicators.append("Excessive hyphens in domain name")
 
-        # Rule 8: Obfuscated / Encoded Characters (+0.15)
+        # Rule 9: Obfuscated / Encoded Characters (+0.15)
         has_encoded_chars = "%" in raw_url
         if has_encoded_chars:
             score += 0.15
             indicators.append("Obfuscated or percent-encoded characters in URL")
 
-        # Rule 9: Non-standard Port (+0.15)
+        # Rule 10: Non-standard Port (+0.15)
         has_non_standard_port = False
         if port is not None and port not in STANDARD_PORTS:
             has_non_standard_port = True
             score += 0.15
             indicators.append(f"Non-standard network port ({port}) in URL")
 
-        # Rule 10: Suspicious Keywords in Path / Query / Domain (+0.20)
+        # Rule 11: Suspicious Keywords in Path / Query / Domain (+0.20)
         url_lower = raw_url.lower()
         keywords_found = []
         for kw in self.suspicious_keywords:
@@ -306,7 +324,7 @@ class LocalUrlLexicalParser:
             score += min(0.25, 0.10 * len(keywords_found))
             indicators.append("Suspicious security/banking keywords in URL")
 
-        # Rule 11: Unusually long URL length (>75 chars) (+0.10)
+        # Rule 12: Unusually long URL length (>75 chars) (+0.10)
         if url_length > 75:
             score += 0.10
             indicators.append("Unusually long URL")
@@ -325,6 +343,7 @@ class LocalUrlLexicalParser:
             host_length=host_length,
             is_ip=is_ip,
             is_https=is_https,
+            is_shortened=is_shortened,
             subdomain_count=subdomain_count,
             hyphen_count=hyphen_count,
             has_at_symbol=has_at_symbol,

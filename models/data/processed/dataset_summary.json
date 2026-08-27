@@ -1,41 +1,41 @@
 {
-  "total_groups": 36,
-  "total_samples": 144,
-  "phishing_samples": 80,
-  "legitimate_samples": 64,
+  "total_groups": 44,
+  "total_samples": 176,
+  "phishing_samples": 92,
+  "legitimate_samples": 84,
   "splits": {
     "train": {
-      "samples": 100,
-      "groups": 25,
-      "phishing": 56,
-      "legitimate": 44,
-      "ratio": 0.6944
+      "samples": 124,
+      "groups": 31,
+      "phishing": 64,
+      "legitimate": 60,
+      "ratio": 0.7045
     },
     "validation": {
-      "samples": 20,
-      "groups": 5,
-      "phishing": 12,
-      "legitimate": 8,
-      "ratio": 0.1389
-    },
-    "test": {
       "samples": 24,
       "groups": 6,
       "phishing": 12,
       "legitimate": 12,
-      "ratio": 0.1667
+      "ratio": 0.1364
+    },
+    "test": {
+      "samples": 28,
+      "groups": 7,
+      "phishing": 16,
+      "legitimate": 12,
+      "ratio": 0.1591
     }
   },
   "language_distribution": {
-    "kannada": 72,
-    "english": 36,
-    "code-mixed": 36
+    "kannada": 88,
+    "english": 44,
+    "code-mixed": 44
   },
   "specialized_test_subsets": {
-    "test_native_kannada": 6,
-    "test_transliterated_kannada": 6,
-    "test_codemixed": 6,
-    "test_english": 6
+    "test_native_kannada": 7,
+    "test_transliterated_kannada": 7,
+    "test_codemixed": 7,
+    "test_english": 7
   },
   "group_leakage": {
     "train_val_overlap": 0,

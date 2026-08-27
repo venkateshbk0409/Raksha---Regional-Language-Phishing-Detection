@@ -2,6 +2,7 @@ group_id,text,label,language,script,category,has_url,variant_type
 PHISH_UTIL_01,BESCOM Electricity Alert: Your power supply will be disconnected tonight at 9:30 PM due to unpaid bill. Call officer immediately at 9845123456,1,english,latin,utility_bill_threat,False,original_english
 PHISH_UTIL_05,BWSSB Water Notice: Water supply connection #90218 will be stopped from tomorrow morning due to arrears. Contact helpline 9102938475,1,english,latin,utility_bill_threat,False,original_english
 PHISH_REW_04,"Gruha Lakshmi Scheme: Karnataka Govt has approved Rs 2,000 monthly allowance for your Aadhaar card. Collect at http://gruhalakshmi-gov-karnataka.org",1,english,latin,fake_reward_lottery,True,original_english
-LEGIT_OTP_02,"Your OTP for transaction of Rs 1,200 at Swiggy using HDFC Card ending 4091 is 849201. Do not share OTP for your security.",0,english,latin,legitimate_otp,False,original_english
-LEGIT_TXN_02,UPI Alert: Rs 250 paid successfully to Nandini Milk Parlour from GPay UPI Ref 92839104819. Clear balance in your account.,0,english,latin,legitimate_transaction,False,original_english
+PHISH_TAX_01,"Income Tax Department: Tax refund of Rs 18,450 approved for your PAN. Verify bank account number to credit: http://incometax-refund-gov.in",1,english,latin,credential_harvesting,True,original_english
 LEGIT_PERS_01,"Hi Ramesh, are you coming to Mysore this weekend for the festival? Let me know the train timing.",0,english,latin,legitimate_personal,False,original_english
+LEGIT_TXN_04,"Your account ending in 4821 was credited with Rs 5,000 on 27 Aug 2026. If you did not make this transaction, contact your bank using the official number.",0,english,latin,legitimate_transaction,False,original_english
+LEGIT_REW_01,Your credit card reward point balance is 450 points for card ending 3920. You can view points in your monthly account statement.,0,english,latin,legitimate_service,False,original_english
