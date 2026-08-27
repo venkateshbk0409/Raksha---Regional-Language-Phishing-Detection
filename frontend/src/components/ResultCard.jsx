@@ -22,44 +22,56 @@ export function ResultCard({ result, onReset }) {
 
   const { classification, risk_score, language_detected, indicators, recommended_action } = result;
 
-  // Semantic color theming based on design-system.md
+  // Semantic color theming based on warm design system
   let theme = {
-    badgeBg: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
-    border: "border-emerald-500/40",
-    cardGlow: "shadow-emerald-500/10",
-    barColor: "bg-emerald-500",
-    iconBg: "bg-emerald-500/20 text-emerald-400",
+    badgeBg: "bg-[#ecf7ed] text-[#14532d] border-[#c3e6cb]",
+    border: "border-[#c3e6cb]",
+    barColor: "bg-[#16a34a]",
+    iconBg: "bg-[#dcfce7] text-[#15803d]",
     Icon: ShieldCheck,
     label: "Safe Content",
     verdictSub: "No high-risk social-engineering or malicious link threats detected.",
     zoneText: "Safe Zone (< 0.40)",
+    actionBg: "bg-[#f4fbf5] border-[#c3e6cb]",
+    actionTitleColor: "text-[#15803d]",
   };
 
   if (classification === "Suspicious") {
     theme = {
-      badgeBg: "bg-amber-500/10 text-amber-400 border-amber-500/30",
-      border: "border-amber-500/40",
-      cardGlow: "shadow-amber-500/10",
-      barColor: "bg-amber-500",
-      iconBg: "bg-amber-500/20 text-amber-400",
+      badgeBg: "bg-[#fef6e7] text-[#783e08] border-[#fde1ab]",
+      border: "border-[#fde1ab]",
+      barColor: "bg-[#d97706]",
+      iconBg: "bg-[#fef3c7] text-[#b45309]",
       Icon: AlertTriangle,
       label: "Suspicious Content",
       verdictSub: "Potential threat signals or lexical anomalies detected. Proceed with caution.",
       zoneText: "Suspicious Zone (0.40 - 0.74)",
+      actionBg: "bg-[#fffbf2] border-[#fde1ab]",
+      actionTitleColor: "text-[#b45309]",
     };
   } else if (classification === "Phishing") {
     theme = {
-      badgeBg: "bg-rose-500/10 text-rose-400 border-rose-500/30",
-      border: "border-rose-500/40",
-      cardGlow: "shadow-rose-500/10",
-      barColor: "bg-rose-500",
-      iconBg: "bg-rose-500/20 text-rose-400",
+      badgeBg: "bg-[#fdf0ee] text-[#881c1c] border-[#f9c6c0]",
+      border: "border-[#f9c6c0]",
+      barColor: "bg-[#dc2626]",
+      iconBg: "bg-[#fee2e2] text-[#b91c1c]",
       Icon: ShieldAlert,
       label: "Phishing Threat Detected",
       verdictSub: "High-confidence social engineering, urgency, or malicious URL threat detected.",
       zoneText: "High-Risk Phishing Zone (≥ 0.75)",
+      actionBg: "bg-[#fff7f6] border-[#f9c6c0]",
+      actionTitleColor: "text-[#b91c1c]",
     };
   }
+
+  // Detect low-evidence / short / ambiguous input for calm contextual guidance
+  const isLowEvidence =
+    classification === "Suspicious" &&
+    (language_detected === "unknown" ||
+      !indicators ||
+      indicators.length === 0 ||
+      (indicators.length === 1 &&
+        (indicators[0].includes("degraded") || indicators[0].includes("linguistic"))));
 
   const { Icon } = theme;
   const scorePercent = Math.min(100, Math.max(0, Math.round(risk_score * 100)));
@@ -84,69 +96,80 @@ export function ResultCard({ result, onReset }) {
   };
 
   return (
-    <div className={`glass-card rounded-2xl p-6 sm:p-8 border ${theme.border} shadow-2xl ${theme.cardGlow} transition-all duration-300 space-y-6`}>
-      {/* Top Header with Classification and Quantitative Score */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-800">
+    <div className={`surface-elevated p-6 sm:p-8 border ${theme.border} space-y-6 animate-fadeIn`}>
+      {/* SECTION 1: VERDICT & RISK METER (The Focal Point) */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-[#e7e5dc]">
         <div className="flex items-start sm:items-center space-x-4">
-          <div className={`p-4 rounded-2xl ${theme.iconBg} flex-shrink-0 shadow-lg`}>
-            <Icon className="w-9 h-9" />
+          <div className={`p-3.5 rounded-2xl ${theme.iconBg} flex-shrink-0 shadow-xs`}>
+            <Icon className="w-8 h-8" />
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <span className={`text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider border ${theme.badgeBg}`}>
+              <span className={`text-xs px-3 py-0.5 rounded-full font-bold uppercase tracking-wider border ${theme.badgeBg}`}>
                 {classification}
               </span>
-              <span className="text-xs px-2.5 py-1 rounded-full bg-slate-800/90 text-slate-300 border border-slate-700 font-mono flex items-center gap-1.5">
-                <Globe className="w-3 h-3 text-cyan-400" />
+              <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#f0eee6] text-stone-700 border border-[#e2dfd4] font-mono flex items-center gap-1.5">
+                <Globe className="w-3 h-3 text-brand-600" />
                 <span>{langDisplay}</span>
               </span>
             </div>
-            <h3 className="text-2xl font-extrabold text-white mt-1.5">{theme.label}</h3>
-            <p className="text-xs sm:text-sm text-slate-400 mt-0.5">{theme.verdictSub}</p>
+            <h3 className="text-2xl font-bold text-stone-900 mt-1.5">{theme.label}</h3>
+            <p className="text-xs sm:text-sm text-stone-600 mt-0.5">{theme.verdictSub}</p>
           </div>
         </div>
 
-        {/* Dynamic Risk Gauge & Score Card */}
-        <div className="bg-slate-900/90 rounded-2xl p-4 sm:p-5 border border-slate-800 md:min-w-[220px] shadow-inner">
+        {/* Calibrated Risk Index Gauge */}
+        <div className="bg-[#fbfaf7] rounded-2xl p-4 sm:p-5 border border-[#e2dfd4] md:min-w-[230px]">
           <div className="flex items-baseline justify-between mb-2">
-            <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider flex items-center gap-1">
-              <Activity className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="text-xs text-stone-500 font-bold uppercase tracking-wider flex items-center gap-1.5">
+              <Activity className="w-3.5 h-3.5 text-brand-600" />
               Risk Index
             </span>
-            <span className="text-2xl font-black font-mono text-white">
+            <span className="text-2xl font-bold font-mono text-stone-900">
               {(risk_score).toFixed(2)}
             </span>
           </div>
 
           {/* Calibrated Meter */}
-          <div className="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden p-0.5">
+          <div className="w-full bg-[#e7e5dc] rounded-full h-2 overflow-hidden p-0.5">
             <div
               className={`h-full ${theme.barColor} transition-all duration-700 rounded-full`}
               style={{ width: `${scorePercent}%` }}
             />
           </div>
 
-          <div className="flex justify-between items-center text-[10px] text-slate-400 mt-2 font-mono">
+          <div className="flex justify-between items-center text-[10px] text-stone-500 mt-2 font-mono">
             <span>0.00 (Safe)</span>
-            <span className="text-cyan-400 font-medium">{theme.zoneText}</span>
+            <span className="text-stone-700 font-semibold">{theme.zoneText}</span>
             <span>1.00</span>
           </div>
         </div>
       </div>
 
-      {/* Recommended Action Alert Box */}
-      <div className="p-5 rounded-2xl bg-slate-900/95 border border-slate-800/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      {/* Calm contextual alert for low-evidence / ambiguous input */}
+      {isLowEvidence && (
+        <div className="p-4 rounded-xl bg-[#fef6e7] border border-[#fde1ab] flex items-start space-x-3 text-xs text-[#783e08]">
+          <Info className="w-4 h-4 text-[#b45309] flex-shrink-0 mt-0.5" />
+          <div className="space-y-0.5">
+            <span className="font-semibold">Limited context detected: </span>
+            <span className="text-[#92400e]">
+              The input is very short or ambiguous. No clear phishing indicators or malicious URLs were found, but we recommend pasting the full message or link for complete verification.
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* SECTION 2: WHAT THE USER SHOULD DO (Actionable Guidance) */}
+      <div className={`p-5 rounded-2xl border ${theme.actionBg} flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4`}>
         <div className="flex items-start space-x-3.5">
-          <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 flex-shrink-0 mt-0.5">
-            <ArrowRight className="w-5 h-5" />
+          <div className="p-2 rounded-xl bg-white text-brand-600 border border-[#e2dfd4] flex-shrink-0 mt-0.5 shadow-xs">
+            <ArrowRight className="w-4 h-4" />
           </div>
           <div>
-            <div className="flex items-center space-x-2">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-cyan-400">
-                Actionable Guidance
-              </h4>
-            </div>
-            <p className="text-sm font-semibold text-slate-100 mt-1 leading-relaxed">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-600">
+              Actionable Guidance
+            </h4>
+            <p className="text-sm font-semibold text-stone-900 mt-0.5 leading-relaxed">
               {recommended_action}
             </p>
           </div>
@@ -155,37 +178,37 @@ export function ResultCard({ result, onReset }) {
         <button
           type="button"
           onClick={handleCopyAction}
-          className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-750 text-slate-300 hover:text-white border border-slate-700 text-xs font-medium transition-all active:scale-95 flex-shrink-0"
+          className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-[#faf9f4] text-stone-700 hover:text-stone-900 border border-[#dedad0] text-xs font-semibold shadow-xs transition-all active:scale-95 flex-shrink-0"
           title="Copy recommended action"
         >
           {copied ? (
             <>
-              <Check className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-400">Copied!</span>
+              <Check className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="text-emerald-700">Copied!</span>
             </>
           ) : (
             <>
-              <Copy className="w-3.5 h-3.5" />
+              <Copy className="w-3.5 h-3.5 text-stone-500" />
               <span>Copy Advice</span>
             </>
           )}
         </button>
       </div>
 
-      {/* Threat Signals & Explainability Breakdown */}
+      {/* SECTION 3: WHY THIS VERDICT WAS REACHED (Detected Threat Signals) */}
       <div className="space-y-3 pt-1">
         <div className="flex items-center justify-between">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-            <Layers className="w-4 h-4 text-cyan-400" />
+          <h4 className="text-xs font-bold uppercase tracking-wider text-stone-500 flex items-center gap-1.5">
+            <Layers className="w-4 h-4 text-brand-600" />
             Detected Threat Signals ({indicators?.length || 0})
           </h4>
-          <span className="text-[11px] text-slate-500 italic">
-            Click any badge for signal explanation
+          <span className="text-[11px] text-stone-400">
+            Hover or tap any badge for details
           </span>
         </div>
 
         {indicators && indicators.length > 0 ? (
-          <div className="flex flex-wrap gap-2.5 pt-1">
+          <div className="flex flex-wrap gap-2 pt-1">
             {indicators.map((ind, idx) => (
               <IndicatorBadge
                 key={idx}
@@ -195,24 +218,24 @@ export function ResultCard({ result, onReset }) {
             ))}
           </div>
         ) : (
-          <div className="flex items-center space-x-3 text-xs text-slate-400 bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
-            <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+          <div className="flex items-center space-x-3 text-xs text-stone-600 bg-[#fbfaf7] p-4 rounded-xl border border-[#e7e5dc]">
+            <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
             <span>No malicious lexical patterns, urgent social-engineering tactics, or phishing links were detected.</span>
           </div>
         )}
       </div>
 
-      {/* Scan Another Message & Reset */}
-      <div className="pt-4 border-t border-slate-800/90 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
-        <span className="flex items-center gap-1">
-          <Info className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Anonymous metadata (excluding message content) is logged for system improvement.</span>
+      {/* Reset & Privacy Reassurance */}
+      <div className="pt-4 border-t border-[#e7e5dc] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-500">
+        <span className="flex items-center gap-1.5">
+          <Info className="w-3.5 h-3.5 text-brand-600" />
+          <span>No message content is stored. Stateless privacy by default.</span>
         </span>
         <button
           onClick={onReset}
-          className="w-full sm:w-auto flex items-center justify-center space-x-2 font-medium text-slate-200 hover:text-white px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-750 border border-slate-700 transition-all active:scale-95 shadow-md"
+          className="w-full sm:w-auto flex items-center justify-center space-x-2 font-semibold text-stone-700 hover:text-stone-900 px-5 py-2.5 rounded-xl bg-[#f0eee6] hover:bg-[#e7e4d8] border border-[#dedad0] transition-all active:scale-95 shadow-xs"
         >
-          <RotateCcw className="w-4 h-4 text-cyan-400" />
+          <RotateCcw className="w-3.5 h-3.5 text-brand-600" />
           <span>Scan Another Message</span>
         </button>
       </div>

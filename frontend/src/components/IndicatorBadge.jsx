@@ -16,87 +16,116 @@ import {
 const INDICATOR_EXPLANATIONS = {
   "IP address host detected": {
     category: "url",
-    description: "The link points directly to a numeric IP address rather than a registered domain name, a classic tactic to bypass domain reputation checks.",
+    friendlyTitle: "Direct IP link (no domain name)",
+    description: "The link points directly to a numeric IP address rather than a registered domain name, which is a common technique used to hide fraudulent websites.",
     icon: Server,
   },
   "Suspicious TLD detected": {
     category: "url",
-    description: "The domain uses a top-level domain (e.g., .xyz, .top, .tk) statistically associated with high rates of malicious phishing disposable infrastructure.",
+    friendlyTitle: "Unusual web extension",
+    description: "The web address uses an unconventional extension (such as .xyz, .top, or .tk) frequently associated with disposable scam pages.",
     icon: LinkIcon,
   },
   "Excessive subdomains": {
     category: "url",
-    description: "The URL has 3 or more subdomain levels, often used to create lookalike names (e.g. sbi.bank.login.phish.com) to deceive mobile users.",
+    friendlyTitle: "Deceptive lookalike domain",
+    description: "The link has multiple nested subdomains (e.g., sbi.bank.login.phish.com) designed to deceive mobile users by hiding the real destination.",
     icon: LinkIcon,
   },
   "Excessive hyphens in host": {
     category: "url",
-    description: "Multiple hyphens in domain names are frequently used in typosquatting and deceptive brand imitation.",
+    friendlyTitle: "Brand imitation with hyphens",
+    description: "Multiple hyphens in the domain name are often used to create close lookalikes of trusted brands and banks.",
     icon: LinkIcon,
   },
   "Userinfo (@) symbol in URL": {
     category: "url",
-    description: "The '@' character causes browsers to ignore preceding text as authentication info, hiding the real destination domain.",
+    friendlyTitle: "Hidden destination link",
+    description: "The '@' symbol in a web address causes browsers to ignore the front part of the link, redirecting you to a different, hidden destination.",
     icon: AlertOctagon,
   },
   "Hex-encoded/obfuscated characters": {
     category: "url",
-    description: "Percent-encoded characters (%20, %2e, etc.) are used to disguise malicious paths and bypass keyword filters.",
+    friendlyTitle: "Scrambled / hidden web address",
+    description: "Special encoded characters are used to disguise the real destination and evade automated security inspection.",
     icon: FileWarning,
   },
   "Suspicious port detected": {
     category: "url",
-    description: "The URL connects over a non-standard web port (e.g. :8080, :8888, :3000), typical of rogue phishing servers.",
+    friendlyTitle: "Non-standard connection port",
+    description: "The link connects over an unusual port rather than standard secure web ports, typical of unverified temporary servers.",
     icon: Server,
   },
   "Punycode/homoglyph domain detected": {
     category: "url",
-    description: "Uses internationalized characters or visual lookalikes (homoglyphs) to impersonate trusted brand names.",
+    friendlyTitle: "Lookalike visual alphabet tricks",
+    description: "Uses characters from other alphabets that look identical to normal letters to impersonate legitimate brand names.",
     icon: AlertOctagon,
   },
   "Suspicious keywords in URL path": {
     category: "url",
-    description: "Contains high-risk credential-harvesting keywords like 'login', 'verify', 'update', 'banking', or 'otp' in the URL path.",
+    friendlyTitle: "Sensitive action keyword in link",
+    description: "Contains credential-harvesting words like 'login', 'verify', 'update', or 'otp' aiming to collect confidential credentials.",
     icon: LinkIcon,
   },
   "Insecure HTTP link detected": {
     category: "url",
-    description: "The link uses unencrypted HTTP instead of HTTPS, leaving any submitted sensitive information vulnerable to interception.",
+    friendlyTitle: "Unencrypted web connection (HTTP)",
+    description: "The link uses unencrypted HTTP instead of secure HTTPS, meaning sensitive information entered on the page is not protected.",
     icon: LinkIcon,
   },
   "Malformed link detected": {
     category: "url",
-    description: "The URL structure is syntactically invalid or intentionally broken to prevent automated parser inspection.",
+    friendlyTitle: "Abnormal or broken link structure",
+    description: "The link is syntactically broken or formatted in an unusual way to bypass standard safety checks.",
     icon: FileWarning,
   },
   "Urgent call-to-action detected": {
     category: "nlp",
-    description: "Uses artificial time pressure (e.g. 'immediately', 'within 2 hours', 'account will be suspended') to trigger panic and bypass critical thinking.",
+    friendlyTitle: "Panic / Artificial urgency",
+    description: "Uses urgent time pressure ('within 2 hours', 'immediately') to cause panic so you act quickly without verifying.",
     icon: AlertTriangle,
   },
   "Account suspension threat": {
     category: "nlp",
-    description: "Threatens punitive action against your bank, electricity, or SIM card services to coerce rapid compliance.",
+    friendlyTitle: "Service suspension warning",
+    description: "Threatens to block your bank account, electricity, or SIM card to coerce immediate compliance.",
     icon: AlertOctagon,
   },
   "Financial / reward incentive": {
     category: "nlp",
-    description: "Promises unverified cash prizes, lottery payouts, or refunds (e.g. ₹50,000 lottery) to entice user engagement.",
+    friendlyTitle: "Unverified cash or prize offer",
+    description: "Promises unexpected lottery winnings, cash rewards, or refunds to entice you into opening the link.",
+    icon: AlertTriangle,
+  },
+  "High phishing intent detected in message text": {
+    category: "nlp",
+    friendlyTitle: "Known scam language pattern",
+    description: "The message language closely matches patterns found in regional social-engineering and financial scam campaigns.",
+    icon: ShieldAlert,
+  },
+  "Suspicious linguistic patterns detected in message": {
+    category: "nlp",
+    friendlyTitle: "Unusual phrasing pattern",
+    description: "Contains coercive or suspicious phrasing common in phishing messages.",
     icon: AlertTriangle,
   },
   "Kannada language detected": {
     category: "lang",
-    description: "Content is composed in native Kannada script, analyzed through Raksha's Indic NLP lexical pipeline.",
+    friendlyTitle: "Native Kannada text",
+    description: "Content is composed in native Kannada script and processed by Raksha's regional language analyzer.",
     icon: Globe,
   },
   "Code-mixed / Kanglish detected": {
     category: "lang",
-    description: "Text mixes Kannada and English or uses Latin-script transliterated Kannada (Kanglish) to bypass monolingual filters.",
+    friendlyTitle: "Kanglish / Transliterated text",
+    description: "The message mixes Kannada and English words or spells Kannada phrases in English letters (Kanglish).",
     icon: Globe,
   },
   "Analysis partially degraded.": {
     category: "system",
-    description: "NLP model inference encountered a recoverable exception; conservative fallback baseline risk applied.",
+    friendlyTitle: "Limited text context",
+    description: "The text was very short or ambiguous; conservative baseline safety evaluation applied.",
     icon: Info,
   },
 };
@@ -104,22 +133,22 @@ const INDICATOR_EXPLANATIONS = {
 export function IndicatorBadge({ indicator, classification }) {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  // Match known explanation or fallback
   const info = INDICATOR_EXPLANATIONS[indicator] || {
     category: classification === "Phishing" ? "nlp" : "info",
-    description: `Risk signal detected during automated lexical & intent scanning: "${indicator}"`,
+    friendlyTitle: indicator,
+    description: `Signal detected during automated inspection: "${indicator}"`,
     icon: classification === "Phishing" ? ShieldAlert : AlertTriangle,
   };
 
   const Icon = info.icon;
 
-  let badgeStyle = "bg-amber-500/10 text-amber-300 border-amber-500/30 hover:border-amber-400/60";
+  let badgeStyle = "bg-[#fef6e7] text-[#783e08] border-[#fde1ab] hover:bg-[#fdeece]";
   if (classification === "Phishing" || info.category === "url") {
-    badgeStyle = "bg-rose-500/10 text-rose-300 border-rose-500/30 hover:border-rose-400/60";
+    badgeStyle = "bg-[#fdf0ee] text-[#881c1c] border-[#f9c6c0] hover:bg-[#fae2de]";
   } else if (classification === "Safe") {
-    badgeStyle = "bg-emerald-500/10 text-emerald-300 border-emerald-500/30 hover:border-emerald-400/60";
+    badgeStyle = "bg-[#ecf7ed] text-[#14532d] border-[#c3e6cb] hover:bg-[#dff0e1]";
   } else if (info.category === "lang") {
-    badgeStyle = "bg-cyan-500/10 text-cyan-300 border-cyan-500/30 hover:border-cyan-400/60";
+    badgeStyle = "bg-[#eef2ff] text-[#312e81] border-[#c7d2fe] hover:bg-[#e0e7ff]";
   }
 
   return (
@@ -139,15 +168,15 @@ export function IndicatorBadge({ indicator, classification }) {
 
       {/* Popover / Tooltip */}
       {showTooltip && (
-        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 rounded-xl bg-slate-900 border border-slate-700 shadow-2xl z-30 text-left animate-fadeIn">
-          <div className="flex items-center space-x-1.5 pb-1 mb-1.5 border-b border-slate-800 text-[11px] font-semibold uppercase tracking-wider text-slate-300">
-            <Icon className="w-3.5 h-3.5 text-cyan-400" />
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-72 p-3.5 rounded-xl bg-white border border-[#dedad0] shadow-elevated z-30 text-left animate-fadeIn">
+          <div className="flex items-center space-x-1.5 pb-1.5 mb-1.5 border-b border-[#e7e5dc] text-[11px] font-bold uppercase tracking-wider text-stone-700">
+            <Icon className="w-3.5 h-3.5 text-brand-600" />
             <span>Threat Explanation</span>
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">
+          <p className="text-xs text-stone-600 leading-relaxed font-normal">
             {info.description}
           </p>
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-slate-700" />
+          <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-[#dedad0]" />
         </div>
       )}
     </div>

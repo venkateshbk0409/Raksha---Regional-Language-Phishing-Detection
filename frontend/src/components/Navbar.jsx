@@ -3,49 +3,49 @@ import { ShieldCheck, Info, ScanLine } from "lucide-react";
 
 export function Navbar({ activeTab, onTabChange }) {
   return (
-    <header className="sticky top-0 z-50 glass-card border-b border-slate-800/80">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-50 bg-[#f6f5f0]/90 backdrop-blur-md border-b border-[#e7e5dc]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Brand */}
         <div 
           onClick={() => onTabChange("scanner")}
-          className="flex items-center space-x-3 cursor-pointer group"
+          className="flex items-center space-x-3 cursor-pointer group select-none"
         >
-          <div className="p-2 rounded-xl bg-gradient-to-tr from-cyan-600 to-indigo-600 shadow-md shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all">
-            <ShieldCheck className="w-6 h-6 text-white" />
+          <div className="p-2 rounded-xl bg-brand-600 text-white shadow-xs group-hover:bg-brand-700 transition-colors">
+            <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="text-xl font-bold tracking-tight text-white">RAKSHA</span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-400 border border-cyan-800 font-medium">
+              <span className="text-lg font-bold tracking-tight text-stone-900">RAKSHA</span>
+              <span className="text-xs px-2 py-0.5 rounded-full bg-[#edeae1] text-stone-700 border border-[#dedad0] font-medium font-kannada">
                 ರಕ್ಷಾ
               </span>
             </div>
-            <p className="text-xs text-slate-400 hidden sm:block">Multilingual Regional Phishing Shield</p>
+            <p className="text-[11px] text-stone-500 hidden sm:block">Regional Phishing & Fraud Shield</p>
           </div>
         </div>
 
         {/* Navigation Tabs */}
-        <nav className="flex items-center space-x-1 sm:space-x-2">
+        <nav className="flex items-center space-x-1 sm:space-x-1.5">
           <button
             onClick={() => onTabChange("scanner")}
-            className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
               activeTab === "scanner"
-                ? "bg-slate-800 text-cyan-400 border border-slate-700 shadow-sm"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-850"
+                ? "bg-white text-stone-900 border border-[#e0ded4] font-semibold shadow-xs"
+                : "text-stone-600 hover:text-stone-900 hover:bg-[#edeae1]/70"
             }`}
           >
-            <ScanLine className="w-4 h-4" />
+            <ScanLine className="w-3.5 h-3.5" />
             <span>Scanner</span>
           </button>
           <button
             onClick={() => onTabChange("about")}
-            className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
               activeTab === "about"
-                ? "bg-slate-800 text-cyan-400 border border-slate-700 shadow-sm"
-                : "text-slate-400 hover:text-slate-200 hover:bg-slate-850"
+                ? "bg-white text-stone-900 border border-[#e0ded4] font-semibold shadow-xs"
+                : "text-stone-600 hover:text-stone-900 hover:bg-[#edeae1]/70"
             }`}
           >
-            <Info className="w-4 h-4" />
+            <Info className="w-3.5 h-3.5" />
             <span>Methodology</span>
           </button>
         </nav>

@@ -83,4 +83,32 @@ describe("ScannerPage Integration", () => {
     const textarea = screen.getByPlaceholderText(/Paste suspicious SMS/i);
     expect(textarea.value).toContain("ಪ್ರಿಯ ಗ್ರಾಹಕರೇ");
   });
+
+  it("automatically smooth-scrolls to the result card upon successful scan", async () => {
+    const mockApiResponse = {
+      classification: "Phishing",
+      risk_score: 0.90,
+      language_detected: "kannada",
+      indicators: ["IP address host detected"],
+      recommended_action: "Do not click any links or share sensitive information. Report and delete this message.",
+    };
+
+    vi.spyOn(apiService, "analyzeContent").mockResolvedValue(mockApiResponse);
+
+    const scrollIntoViewMock = vi.fn();
+    window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+
+    render(<ScannerPage />);
+
+    const textarea = screen.getByPlaceholderText(/Paste suspicious SMS/i);
+    fireEvent.change(textarea, { target: { value: "http://192.168.1.1/login" } });
+
+    const submitBtn = screen.getByRole("button", { name: /Scan for Phishing/i });
+    fireEvent.click(submitBtn);
+
+    await waitFor(() => {
+      expect(screen.getByText("Phishing Threat Detected")).toBeInTheDocument();
+      expect(scrollIntoViewMock).toHaveBeenCalled();
+    });
+  });
 });
