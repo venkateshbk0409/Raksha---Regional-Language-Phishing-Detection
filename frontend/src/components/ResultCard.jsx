@@ -151,9 +151,9 @@ export function ResultCard({ result, onReset }) {
         <div className="p-4 rounded-xl bg-[#fef6e7] border border-[#fde1ab] flex items-start space-x-3 text-xs text-[#783e08]">
           <Info className="w-4 h-4 text-[#b45309] flex-shrink-0 mt-0.5" />
           <div className="space-y-0.5">
-            <span className="font-semibold">Limited context detected: </span>
+            <span className="font-semibold">Not enough context to assess this message. </span>
             <span className="text-[#92400e]">
-              The input is very short or ambiguous. No clear phishing indicators or malicious URLs were found, but we recommend pasting the full message or link for complete verification.
+              Paste the complete SMS, WhatsApp message, email, or suspicious link for a more useful analysis.
             </span>
           </div>
         </div>

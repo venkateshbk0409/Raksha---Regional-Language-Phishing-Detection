@@ -4,7 +4,7 @@ import { ShieldCheck, Info, ScanLine } from "lucide-react";
 export function Navbar({ activeTab, onTabChange }) {
   return (
     <header className="sticky top-0 z-50 bg-[#f6f5f0]/90 backdrop-blur-md border-b border-[#e7e5dc]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Brand */}
         <div 
           onClick={() => onTabChange("scanner")}
