@@ -25,17 +25,12 @@ Thumbs.db
 # Jupyter
 .ipynb_checkpoints/
 
-# ML / generated files
+# ML / generated files (allow production model artifacts)
 *.pkl
 *.joblib
 *.pt
 *.pth
-
-# ML / generated files
-*.pkl
-*.joblib
-*.pt
-*.pth
+!models/saved_models/**
 
 # Agent specification files (local-only)
 .agent-spec/
